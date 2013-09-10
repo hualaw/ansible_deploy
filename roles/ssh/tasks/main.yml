@@ -1,0 +1,13 @@
+---
+  - name: Reconfigure SSH to only allow access using key-based authentication
+    lineinfile: dest=/etc/ssh/sshd_config 
+          regexp="^#?PasswordAuthentication"
+          line="PasswordAuthentication no"
+
+  - name: modify sshd_config, disabling ssh root login
+    lineinfile: dest=/etc/ssh/sshd_config
+          regexp="^PermitRootLogin yes"
+          line="PermitRootLogin no"
+
+  - name: restart ssh service
+    service: name=ssh state=restarted

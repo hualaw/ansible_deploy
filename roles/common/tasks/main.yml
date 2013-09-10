@@ -1,0 +1,34 @@
+---
+  - name: set hostname
+    command: echo "{{hostname}}" > /etc/hostname && hostname -F /etc/hostname
+
+  - name: set hosts
+    template: src=hosts.j2 dest=/etc/hosts
+
+  - name: set timezone
+    command: echo "Asia/Shanghai" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+
+  - name: update sources.list
+    copy: src=sources.list dest=/etc/apt/sources.list backup=yes
+
+  - name: Upgrade apt packages
+    apt: upgrade=yes
+         update_cache=yes
+
+  - name: Install git
+    apt: pkg=git
+
+  - name: Install NTP
+    apt: pkg=ntp
+
+  - name: Install Vim
+    apt: pkg=vim
+
+  - name: creating a firewall, copy iptables.firewall.rules
+    copy: src=iptables.firewall.rules dest=/etc/iptables.firewall.rules
+
+  - name: creating a firewall, copy firewall
+    copy: src=firewall dest=/etc/network/if-pre-up.d/firewall mode=755
+
+  - name: install fail2ban
+    apt: pkg=fail2ban

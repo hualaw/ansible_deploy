@@ -1,0 +1,16 @@
+---
+  - name: Install nginx
+    apt: pkg=nginx
+
+  - name: Install mysql
+    apt: pkg={{item}}
+    with_items:
+      - mysql-server
+      - mysql-client
+
+  - name: Install php-fpm
+    apt: pkg={{item}}
+    with_items:
+      - php5-fpm
+      - php5-dev
+      - php5-cli

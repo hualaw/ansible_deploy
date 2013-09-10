@@ -1,0 +1,10 @@
+---
+- hosts: all
+
+  user: vagrant
+  sudo: true
+
+  roles:
+    - common
+    - ssh
+    - lamp
