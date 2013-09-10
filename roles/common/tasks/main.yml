@@ -15,14 +15,13 @@
     apt: upgrade=yes
          update_cache=yes
 
-  - name: Install git
-    apt: pkg=git
-
-  - name: Install NTP
-    apt: pkg=ntp
-
-  - name: Install Vim
-    apt: pkg=vim
+  - name: Install command tools
+    apt: pkg={{item}}
+    with_items:
+       - git
+       - vim
+       - ntp
+       - curl
 
   - name: creating a firewall, copy iptables.firewall.rules
     copy: src=iptables.firewall.rules dest=/etc/iptables.firewall.rules

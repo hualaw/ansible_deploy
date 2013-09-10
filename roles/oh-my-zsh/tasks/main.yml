@@ -1,0 +1,23 @@
+---
+  - name: Install zsh
+    apt: pkg=zsh
+
+  - name: Install oh-my-zsh
+    sudo: False
+    action: git repo=https://github.com/robbyrussell/oh-my-zsh dest=~/.oh-my-zsh
+
+  - name: Creating new ~/.zshrc
+    sudo: False
+    action: shell cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+
+  - name: modify ~/.zshrc
+    sudo: False
+    action: shell sed -i -e 's/plugins=(git)/plugins=\(git history-substring-search\)/' ~/.zshrc
+
+  - name: Set zsh as default shell
+    user: name=$user shell=/bin/zsh
+    
+  - name: Installing spf13-vim, The Ultimate Vim Distribution (http://vim.spf13.com)
+    sudo: False
+    action: shell curl https://j.mp/spf13-vim3 -L -o - | sh
+
