@@ -7,6 +7,7 @@
     with_items:
       - mysql-server
       - mysql-client
+      - python-mysqldb
 
   - name: Install php-fpm
     apt: pkg={{item}}
@@ -14,3 +15,4 @@
       - php5-fpm
       - php5-dev
       - php5-cli
+      - php-pear

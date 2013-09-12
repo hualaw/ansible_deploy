@@ -15,6 +15,9 @@
     apt: upgrade=yes
          update_cache=yes
 
+  #- name: upgrade virtualbox guest if needed
+  #  apt: pkg=virtualbox-guest-utils
+
   - name: Install common tools (git vim ntp curl tmux ack most ncdu unzip)
     apt: pkg={{item}}
     with_items:
@@ -37,5 +40,3 @@
   - name: install fail2ban
     apt: pkg=fail2ban
 
-  #- name: upgrade virtualbox guest if needed
-  #  apt: pkg=virtualbox-guest-utils

@@ -1,0 +1,4 @@
+#url: http://download.redis.io/releases/redis-2.6.16.tar.gz
+url: http://192.168.11.11/redis-2.6.16.tar.gz
+path: /tmp/redis/redis-2.6.16
+version: 2.6.16
