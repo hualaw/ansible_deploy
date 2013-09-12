@@ -1,9 +1,9 @@
 ---
-  - name: set hostname
-    command: echo "{{hostname}}" > /etc/hostname && hostname -F /etc/hostname
+  #- name: set hostname
+  #  command: echo "{{hostname}}" > /etc/hostname && hostname -F /etc/hostname
 
-  - name: set hosts
-    template: src=hosts.j2 dest=/etc/hosts
+  #- name: set hosts
+  #  template: src=hosts.j2 dest=/etc/hosts
 
   - name: set timezone
     command: echo "Asia/Shanghai" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
@@ -15,13 +15,18 @@
     apt: upgrade=yes
          update_cache=yes
 
-  - name: Install command tools
+  - name: Install common tools (git vim ntp curl tmux ack most ncdu unzip)
     apt: pkg={{item}}
     with_items:
        - git
        - vim
        - ntp
        - curl
+       - tmux
+       - ack-grep
+       - most
+       - ncdu
+       - unzip
 
   - name: creating a firewall, copy iptables.firewall.rules
     copy: src=iptables.firewall.rules dest=/etc/iptables.firewall.rules
@@ -31,3 +36,6 @@
 
   - name: install fail2ban
     apt: pkg=fail2ban
+
+  #- name: upgrade virtualbox guest if needed
+  #  apt: pkg=virtualbox-guest-utils

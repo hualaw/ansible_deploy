@@ -1,0 +1,5 @@
+#url: http://www.eng.lsu.edu/mirrors/apache//ant/binaries/apache-ant-1.9.2-bin.zip
+url: http://192.168.11.11/apache-ant-1.9.2-bin.zip
+version: 1.9.2
+ant_path: /usr/local/apache-ant-1.9.2/bin
+

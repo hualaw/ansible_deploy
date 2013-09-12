@@ -1,3 +1,45 @@
 ---
-  - name: Download thrift 0.9.0
+  - name: Install develop tools
+    apt: pkg={{item}}
+    with_items:
+       - autoconf
+       - automake
+       - build-essential
+       - python-dev
+       - php5-dev
+       - php5-cli
+       - libevent-dev
+       - libboost-dev
+       - libpcre3-dev
+       - re2c
+       - checkinstall
+
+  - name: ensure directory /tmp/thrift is present
+    file: state=directory path=/tmp/thrift
+
+  - name: Download thrift {{oldversion}}
+    get_url: url={{oldurl}} dest=/tmp/thrift
+
+  - name: extract thrift {{oldversion}}
+    command: tar -xf thrift-{{oldversion}}.tar.gz chdir=/tmp/thrift creates={{path}}
+
+  - name: Download thrift {{version}}
+    get_url: url={{url}} dest=/tmp/thrift
+
+  - name: extract thrift {{version}}
+    command: tar -xf thrift-{{version}}.tar.gz chdir=/tmp/thrift creates={{path}}
+
+  - name: patch {{oldversion}} to {{version}}
+    command: cp thrift-{{oldversion}}/lib/php/Makefile.am thrift-{{version}}/lib/php/Makefile.am chdir=/tmp/thrift
+  #  command: cp -r thrift-{{oldversion}}/lib/php/src/ext/thrift_protocol/ thrift-{{version}}/lib/php/src/ext/ chdir=/tmp/thrift
+
+  - name: configure thrift {{version}}
+    command: ./configure chdir={{path}} creates={{path}}/Makefile
+
+  - name: compile thrift {{version}}
+    command: make chdir={{path}} creates={{path}}/compiler/cpp/thrift
+
+  - name: build deb packages for thrift {{version}}
+    command: checkinstall -D -y --pkgname=thrift --pkgversion={{version}} --maintainer=songchuanhsheng@91waijiao.com make install chdir={{path}}
+  # result --> thrift_{{version}}-1_i386.deb
 

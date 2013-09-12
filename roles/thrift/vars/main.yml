@@ -1,0 +1,7 @@
+#url: http://apache.cs.utah.edu/thrift/0.9.0/thrift-0.9.0.tar.gz
+url: http://192.168.11.11/thrift-0.9.0.tar.gz
+path: /tmp/thrift/thrift-0.9.0
+version: 0.9.0
+oldurl: http://192.168.11.11/thrift-0.9.1.tar.gz
+oldpath: /tmp/thrift/thrift-0.9.1
+oldversion: 0.9.1
