@@ -26,7 +26,7 @@
     command: unzip -u apache-ant-{{version}}-bin.zip chdir=/tmp/java
 
   - name: move ant {{version}} to /usr/local
-    command: mv /tmp/java/apache-ant-{{version}} /usr/local
+    command: rsync -va /tmp/java/apache-ant-{{version}} /usr/local
 
   - name: add {{ant_path}} to path
     lineinfile:
@@ -37,4 +37,4 @@
       line="PATH=\1\2:{{ant_path}}\3"
 
   - name: reload environment
-    command: source /etc/environment
+    raw: source /etc/environment

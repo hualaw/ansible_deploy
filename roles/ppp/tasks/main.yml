@@ -1,0 +1,6 @@
+---
+  - name: install ppp client
+    apt: pkg=pptp-linux
+
+  - name: setup ppp info
+    command: pptpsetup --create {{name}} --server {{server}} --username {{username}} --password '{{password}}' --start --encrypt

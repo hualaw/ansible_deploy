@@ -1,0 +1,15 @@
+---
+  - name: install pptpd
+    apt: pkg=pptpd
+
+  - name: install pptpd.conf
+    copy: src=pptpd.conf dest=/etc/pptpd.conf backup=yes
+    
+  - name: install pptpd-options
+    copy: src=pptpd-options dest=/etc/ppp/pptpd-options backup=yes
+
+  - name: install chap-secrets
+    copy: src=chap-secrets dest=/etc/ppp/chap-secrets backup=yes
+
+  - name: set sysctl rule net.ipv4.ip_forward to 1
+    sysctl: name=net.ipv4.ip_forward value=1 state=present

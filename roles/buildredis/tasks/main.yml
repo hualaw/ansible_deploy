@@ -1,4 +1,16 @@
 ---
+  - name: Install develop tools
+    apt: pkg={{item}}
+    with_items:
+       - autoconf
+       - automake
+       - build-essential
+       - python-dev
+       - php5-dev
+       - php5-cli
+       - libevent-dev
+       - checkinstall
+
   - name: ensure directory /tmp/redis is present
     file: state=directory path=/tmp/redis
 
