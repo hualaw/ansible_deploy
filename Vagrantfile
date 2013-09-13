@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   #config.vm.network :forwarded_port, guest: 80, host: 8012
   #config.vm.network :public_network
-  config.vm.network :private_network, ip: "192.168.91.6"
+  config.vm.network :private_network, ip: "192.168.91.8"
 
   config.ssh.forward_agent = true
 

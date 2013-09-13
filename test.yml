@@ -5,4 +5,12 @@
   sudo: true
 
   roles:
-    - ppp
+    - redis
+    #- common
+    #- ssh
+    #- lamp
+    #- oh-my-zsh
+    #- java
+    #- buildredis
+    #- buildthrift
+

@@ -1,0 +1,42 @@
+---
+  - name: copy redis deb
+    copy: src={{redisdeb}} dest=/tmp/{{redisdeb}}
+    
+  - name: run dpkg install redis
+    command: /usr/bin/dpkg -i /tmp/{{redisdeb}}
+
+  - name: copy phpredis deb
+    copy: src={{phpredisdeb}} dest=/tmp/{{phpredisdeb}}
+
+  - name: run dpkg install phpredis
+    command: /usr/bin/dpkg -i /tmp/{{phpredisdeb}}
+
+  - name: create redis group
+    group: name=redis state=present
+    
+  - name: create redis user
+    user: name=redis group=redis shell=/bin/false
+
+  - name: ensure directory /etc/redis is present
+    file: state=directory path=/etc/redis
+    
+  - name: ensure directory /var/log/redis is present
+    file: state=directory path=/var/log/redis owner=redis
+    
+  - name: ensure directory /var/lib/redis is present
+    file: state=directory path=/var/lib/redis owner=redis
+    
+  - name: copy logroate.d config
+    copy: src=logrotate.d_redis_server dest=/etc/logrotate.d/redis-server
+    
+  - name: copy auto completion support for redis
+    copy: src=redis_cli_completion dest=/etc/bash_completion.d/redis-cli
+    
+  - name: copy redis.conf
+    copy: src=redis.conf dest=/etc/redis/redis.conf
+
+  - name: copy redis-server init.d script
+    copy: src=redis-server dest=/etc/init.d/redis-server
+
+  - name: update-rc.d redis-server
+    command: /usr/sbin/update-rc.d redis-server defaults
