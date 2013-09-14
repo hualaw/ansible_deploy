@@ -5,12 +5,14 @@
   sudo: true
 
   roles:
+    - waijiao
     #- thrift
     #- ppp
     #- common
     #- redis
     #- ssh
-    - lamp
+    #- mysql
+    #- nginx-php
     #- oh-my-zsh
     #- java
     #- buildredis

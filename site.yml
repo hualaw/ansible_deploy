@@ -7,9 +7,12 @@
   roles:
     - common
     - ssh
-    - lamp
+    - mysql
+    - nginx-php
     - oh-my-zsh
     - java
-    - buildredis
-    - buildthrift
+    - redis
+    - thrift
+    #- buildredis
+    #- buildthrift
 

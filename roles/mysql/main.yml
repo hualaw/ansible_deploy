@@ -1,0 +1,20 @@
+---
+  - name: Install mysql
+    apt: pkg={{item}}
+    with_items:
+      - mysql-server
+      - mysql-client
+      - python-mysqldb
+      
+  - name: update mysql configuration
+    copy: src=my.cnf dest=/etc/mysql/my.cnf
+    
+  - name: restart all services
+    service: name=mysql state=restarted
+
+  - name: copy monit configuration
+    copy: src=check-mysql dest=/etc/monit/conf.d/check-mysql
+
+  - name: reload monit resource
+    service: name=monit state=reloaded
+
