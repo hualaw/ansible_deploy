@@ -40,6 +40,6 @@
     command: make chdir={{path}} creates={{path}}/compiler/cpp/thrift
 
   - name: build deb packages for thrift {{version}}
-    command: checkinstall -D -y --pkgname=thrift --pkgversion={{version}} --maintainer=songchuanhsheng@91waijiao.com make install chdir={{path}}
+    command: checkinstall -D -y --pkgname=thrift --pkgversion={{version}} --maintainer=songchuanhsheng@91waijiao.com --exclude=/proc make install chdir={{path}}
   # result --> thrift_{{version}}-1_i386.deb
 

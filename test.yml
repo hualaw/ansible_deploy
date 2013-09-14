@@ -5,7 +5,9 @@
   sudo: true
 
   roles:
-    - redis
+    - thrift
+    #- ppp
+    #- redis
     #- common
     #- ssh
     #- lamp
