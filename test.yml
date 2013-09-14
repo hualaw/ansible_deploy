@@ -10,7 +10,7 @@
     #- common
     #- redis
     #- ssh
-    #- lamp
+    - lamp
     #- oh-my-zsh
     #- java
     #- buildredis
