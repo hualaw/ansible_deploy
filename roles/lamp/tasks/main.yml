@@ -16,3 +16,11 @@
       - php5-dev
       - php5-cli
       - php-pear
+
+  - name: start all services
+    service: name={{item}} state=started
+    with_items:
+      - php5-fpm
+      - nginx
+      - mysql
+

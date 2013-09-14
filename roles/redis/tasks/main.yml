@@ -40,3 +40,12 @@
 
   - name: update-rc.d redis-server
     command: /usr/sbin/update-rc.d redis-server defaults
+
+  - name: copy check-redis monit config
+    copy: src=check-redis dest=/etc/monit/conf.d/check-redis
+
+  - name: reload monit resource
+    service: name=monit state=reloaded
+
+  #- name: start redis service
+  #  service: name=redis-server state=started

@@ -5,10 +5,10 @@
   sudo: true
 
   roles:
-    - thrift
+    #- thrift
     #- ppp
-    #- redis
     #- common
+    #- redis
     #- ssh
     #- lamp
     #- oh-my-zsh

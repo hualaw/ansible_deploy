@@ -18,7 +18,16 @@
   #- name: upgrade virtualbox guest if needed
   #  apt: pkg=virtualbox-guest-utils
 
-  - name: Install common tools (git vim ntp curl tmux ack most ncdu unzip)
+  - name: creating a firewall, copy iptables.firewall.rules
+    copy: src=iptables.firewall.rules dest=/etc/iptables.firewall.rules
+
+  - name: creating a firewall, copy firewall
+    copy: src=firewall dest=/etc/network/if-pre-up.d/firewall mode=755
+
+  - name: apply firewall rules
+    command: /etc/network/if-pre-up.d/firewall
+
+  - name: Install common tools (git vim ntp curl tmux ack most ncdu unzip monit fail2ban)
     apt: pkg={{item}}
     with_items:
        - git
@@ -30,13 +39,12 @@
        - most
        - ncdu
        - unzip
+       - monit
+       - fail2ban
 
-  - name: creating a firewall, copy iptables.firewall.rules
-    copy: src=iptables.firewall.rules dest=/etc/iptables.firewall.rules
-
-  - name: creating a firewall, copy firewall
-    copy: src=firewall dest=/etc/network/if-pre-up.d/firewall mode=755
-
-  - name: install fail2ban
-    apt: pkg=fail2ban
+  - name: copy monit configuration
+    copy: src=monitrc dest=/etc/monit/monitrc
+       
+  - name: start monit service
+    service: name=monit state=reloaded
 
