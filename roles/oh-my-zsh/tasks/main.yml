@@ -14,6 +14,10 @@
     sudo: False
     action: shell sed -i -e 's/plugins=(git)/plugins=\(git history-substring-search\)/' ~/.zshrc
 
+  - name: modify ~/.zshrc
+    sudo: False
+    action: shell sed -i -e '$ a\export EDITOR=vim\nalias ack="ack-grep"' ~/.zshrc
+
   - name: Set zsh as default shell
     user: name=$user shell=/bin/zsh
     

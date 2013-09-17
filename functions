@@ -1,0 +1,51 @@
+#!/bin/sh
+
+#########################################
+# checkout: checkout source code into path
+#
+# usage:
+#   checkout git_repo localpath
+#########################################
+checkout() {
+  if [ ! -d $2 ]; then
+    git clone $1 $2
+  else
+    pushd .
+    cd $2
+    # remove any local unstaged changes
+    git clean -f
+    git reset --hard
+    # checkout master
+    git checkout master
+    # pull lastest change
+    git pull origin master
+    popd
+  fi
+}
+
+#########################################
+# build_package: build package into ansible path
+#
+# usage:
+#   build_package packagename localpath
+#########################################
+build_package() {
+  #cp ./bin/deploy_bootstrap.sh $2/.
+  #./bin/makeself.sh $2 deploy-`date "+%Y%m%d%H%M%S"`.run "deploy installer" ./deploy_bootstrap.sh
+
+  pushd .
+  cd $2/..
+  tar --exclude=.git* --exclude=*.tar.gz -czf $1.tar.gz .
+  popd
+  /bin/cp -f $2/../$1.tar.gz roles/$1/files
+}
+
+#########################################
+# install_package: install package with ansible
+#
+# usage:
+#   install_package packagename sshkey inventoryfile
+#########################################
+install_package() {
+  ansible-playbook -v --private-key=$2 -i $3 $1.yml
+}
