@@ -10,6 +10,7 @@
 
   - name: update sources.list
     copy: src=sources.list dest=/etc/apt/sources.list backup=yes
+    #copy: src=sources.list dest=/etc/apt/sources.list backup=yes
 
   - name: Upgrade apt packages
     apt: upgrade=yes

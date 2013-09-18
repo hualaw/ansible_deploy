@@ -5,7 +5,8 @@
   sudo: true
 
   roles:
-    - waijiao
+    - test
+    #- waijiao
     #- thrift
     #- ppp
     #- common

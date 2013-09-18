@@ -2,3 +2,4 @@ local/*
 gen-*
 *.tar.gz
 .vagrant
+ssh/ansible_id_rsa
