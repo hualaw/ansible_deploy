@@ -49,5 +49,5 @@ build_package() {
 #   install_package packagename sshkey inventoryfile
 #########################################
 install_package() {
-  ansible-playbook -v --private-key=$2 -i $3 $1.yml
+  ansible-playbook -v$1 --private-key=$2 -i $3 $1.yml
 }

@@ -1,15 +1,15 @@
 ---
-- hosts: all
+- hosts: intra
 
-  user: vagrant
+  user: $user
   sudo: true
 
   roles:
-    - test
+    #- test
     #- waijiao
     #- thrift
     #- ppp
-    #- common
+    - common
     #- redis
     #- ssh
     #- mysql

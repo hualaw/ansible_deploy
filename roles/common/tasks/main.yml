@@ -9,7 +9,7 @@
     command: echo "Asia/Shanghai" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 
   - name: update sources.list
-    copy: src=sources.list dest=/etc/apt/sources.list backup=yes
+    template: src=sources.list.j2 dest=/etc/apt/sources.list backup=yes
     #copy: src=sources.list dest=/etc/apt/sources.list backup=yes
 
   - name: Upgrade apt packages
@@ -43,6 +43,10 @@
        - monit
        - fail2ban
 
+  - name: copy tumx config
+    sudo: False
+    copy: src=.tmux.conf dest=~/.tmux.conf
+    
   - name: copy monit configuration
     copy: src=monitrc dest=/etc/monit/monitrc
        
