@@ -15,10 +15,12 @@ checkout() {
     # remove any local unstaged changes
     git clean -f
     git reset --hard
-    # checkout master
+    # switch to online branch
     git checkout master
-    # pull lastest change
-    git pull origin master
+    git branch -D online
+    git checkout -B online
+    # pull lastest change from master or tag
+    git pull origin $3
     popd
   fi
 }
@@ -35,7 +37,7 @@ build_package() {
 
   pushd .
   cd $2/..
-  tar --exclude=.git* --exclude=*.tar.gz -czf $1.tar.gz .
+  tar --exclude=.git* --exclude=*.tar.gz -czf $1.tar.gz $1
   popd
   /bin/cp -f $2/../$1.tar.gz roles/$1/files
 }

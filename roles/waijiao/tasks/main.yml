@@ -11,6 +11,9 @@
   - name: rsync all files into dest
     command: rsync -avz --progress --delete --exclude="*.pyc" ./waijiao /usr/share/nginx/ chdir=~
   
+  - name: chown to www-data
+    command: chown -R www-data:www-data /usr/share/nginx/waijiao
+
   - name: copy waijiao nginx configurations
     copy: src=91waijiao.com dest=/etc/nginx/sites-available/91waijiao.com
 

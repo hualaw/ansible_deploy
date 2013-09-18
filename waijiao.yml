@@ -1,7 +1,7 @@
 ---
 - hosts: all
 
-  user: vagrant
+  user: $user
   sudo: true
 
   roles:

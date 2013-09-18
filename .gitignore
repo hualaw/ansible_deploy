@@ -1,5 +1,6 @@
 local/*
 gen-*
 *.tar.gz
+*.sql.gz
 .vagrant
 ssh/ansible_id_rsa

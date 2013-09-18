@@ -4,10 +4,10 @@
 
 PACKAGE=tizi
 GIT_REPO=git@192.168.11.11:liuhua/zujuan_teacher.git
-INVENTORY=ansible_inventory
-SSHKEY=~/.vagrant.d/insecure_private_key
+INVENTORY=production
+SSHKEY=./ssh/ansible_id_rsa
 LOCAL_PATH=./local/$PACKAGE
-TAG=master
+TAG=0.1
 
 DIR=`dirname $0`
 PROG=`basename $0`

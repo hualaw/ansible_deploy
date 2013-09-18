@@ -11,8 +11,11 @@
   - name: rsync all files into dest
     command: rsync -avz --progress --delete --exclude="*.pyc" ./tizi /usr/share/nginx/ chdir=~
   
-  - name: copy files
+  - name: copy config files
     command: /bin/cp /usr/share/nginx/tizi/application/config/online_config.php /usr/share/nginx/tizi/application/config/config.php
+
+  - name: copy database files
+    command: /bin/cp /usr/share/nginx/tizi/application/config/online_database.php /usr/share/nginx/tizi/application/config/database.php
 
   - name: ensure directory is present
     file: state=directory path=/usr/share/nginx/tizi/application/templates_c mode=0755
@@ -20,6 +23,9 @@
   - name: ensure directory is present
     file: state=directory path=/usr/share/nginx/tizi/application/captcha mode=0755
     
+  - name: chown to www-data
+    command: chown -R www-data:www-data /usr/share/nginx/tizi
+
   - name: copy tizi nginx configurations
     copy: src=tizi.com dest=/etc/nginx/sites-available/tizi.com
 
