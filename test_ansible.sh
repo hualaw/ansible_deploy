@@ -45,5 +45,5 @@ do
   esac
 done
 
-ansible-playbook -${VERBOSE}v --private-key=$SSHKEY -i $INVENTORY $PACKAGE.yml
+ANSIBLE_MODULE_LANG=en_US.UTF-8 ansible-playbook -${VERBOSE}v --private-key=$SSHKEY -i $INVENTORY $PACKAGE.yml
 

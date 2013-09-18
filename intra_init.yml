@@ -1,0 +1,18 @@
+---
+- hosts: intra
+
+  user: $user
+  sudo: true
+
+  roles:
+    - common
+    - ssh
+    - mysql
+    - nginx-php
+    - oh-my-zsh
+    #- java
+    - redis
+    - thrift
+    #- buildredis
+    #- buildthrift
+

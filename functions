@@ -43,11 +43,22 @@ build_package() {
 }
 
 #########################################
+# rsync_package: rsync package to remote hosts
+#
+# usage:
+#   rsync_package username remotehost remotepath localpath
+#########################################
+rsync_package() {
+  rsync -avz --progress --delete --exclude "*.pyc" $4 $1@$2:$3
+}
+
+#########################################
 # install_package: install package with ansible
 #
 # usage:
 #   install_package packagename sshkey inventoryfile
 #########################################
 install_package() {
-  ansible-playbook -v$1 --private-key=$2 -i $3 $1.yml
+  ANSIBLE_MODULE_LANG=en_US.UTF-8 ansible-playbook -v --private-key=$2 -i $3 $1.yml
 }
+
