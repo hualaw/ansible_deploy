@@ -1,25 +1,29 @@
 ---
-  #- name: git checkout source code
-  #  git: repo=git@192.168.11.11:liuhua/php_91waijiao.git dest=/usr/share/nginx/waijiao
-
   - name: copy files
     copy: src=waijiao.tar.gz dest=~/waijiao.tar.gz
+    tags: waijiao
 
   - name: extract files
     command: tar zxf waijiao.tar.gz chdir=~
+    tags: waijiao
 
   - name: rsync all files into dest
     command: rsync -avz --progress --delete --exclude="*.pyc" ./waijiao /usr/share/nginx/ chdir=~
+    tags: waijiao
   
   - name: chown to www-data
     command: chown -R www-data:www-data /usr/share/nginx/waijiao
+    tags: waijiao
 
   - name: copy waijiao nginx configurations
     copy: src=91waijiao.com dest=/etc/nginx/sites-available/91waijiao.com
+    tags: waijiao
 
   - name: link to site-enabled
     file: src=/etc/nginx/sites-available/91waijiao.com dest=/etc/nginx/sites-enabled/91waijiao.com state=link
+    tags: waijiao
 
   - name: reload nginx
     service: name=nginx state=reloaded
+    tags: waijiao
 

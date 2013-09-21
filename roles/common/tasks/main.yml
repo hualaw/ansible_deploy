@@ -10,7 +10,6 @@
 
   - name: update sources.list
     template: src=sources.list.j2 dest=/etc/apt/sources.list backup=yes
-    #copy: src=sources.list dest=/etc/apt/sources.list backup=yes
 
   - name: Upgrade apt packages
     apt: upgrade=yes
@@ -49,7 +48,9 @@
     
   - name: copy monit configuration
     copy: src=monitrc dest=/etc/monit/monitrc
+    tags: monit
        
   - name: start monit service
     service: name=monit state=reloaded
+    tags: monit
 

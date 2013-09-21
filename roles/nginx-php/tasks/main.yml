@@ -1,13 +1,24 @@
 ---
   - name: Install nginx
     apt: pkg=nginx
+    tags: nginx
 
   - name: update nginx configuration
     copy: src=nginx.conf dest=/etc/nginx/nginx.conf
+    tags: nginx
     
   - name: update nginx configuration(default)
     copy: src=nginx-default dest=/etc/nginx/sites-available/default
+    tags: nginx
     
+  - name: restart nginx services
+    service: name=nginx state=restarted
+    tags: nginx
+    
+  - name: copy monit configuration
+    copy: src=check-nginx dest=/etc/monit/conf.d/
+    tags: nginx
+      
   - name: Install php-fpm
     apt: pkg={{item}}
     with_items:
@@ -18,21 +29,20 @@
       - php5-mysql
       - php5-curl
       - php5-gd
+      - php5-imagick
+    tags: php
 
   - name: copy php-fpm configurations
     copy: src=php5-fpm-pool.d-www.conf dest=/etc/php5/fpm/pool.d/www.conf
+    tags: php
     
   - name: restart all services
-    service: name={{item}} state=restarted
-    with_items:
-      - php5-fpm
-      - nginx
+    service: name=php5-fpm state=restarted
+    tags: php
 
   - name: copy monit configuration
-    copy: src={{item}} dest=/etc/monit/conf.d/
-    with_items:
-      - check-nginx
-      - check-phpfpm
+    copy: src=check-phpfpm dest=/etc/monit/conf.d/
+    tags: php
 
   - name: reload monit resource
     service: name=monit state=reloaded

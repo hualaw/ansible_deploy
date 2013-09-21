@@ -1,51 +1,67 @@
 ---
   - name: copy redis deb
     copy: src={{redisdeb}} dest=/tmp/{{redisdeb}}
+    tags: redis
     
   - name: run dpkg install redis
     command: /usr/bin/dpkg -i /tmp/{{redisdeb}}
+    tags: redis
 
   - name: copy phpredis deb
     copy: src={{phpredisdeb}} dest=/tmp/{{phpredisdeb}}
+    tags: redis
 
   - name: run dpkg install phpredis
     command: /usr/bin/dpkg -i /tmp/{{phpredisdeb}}
+    tags: redis
 
   - name: create redis group
     group: name=redis state=present
+    tags: redis
     
   - name: create redis user
     user: name=redis group=redis shell=/bin/false
+    tags: redis
 
   - name: ensure directory /etc/redis is present
     file: state=directory path=/etc/redis
+    tags: redis
     
   - name: ensure directory /var/log/redis is present
     file: state=directory path=/var/log/redis owner=redis
+    tags: redis
     
   - name: ensure directory /var/lib/redis is present
     file: state=directory path=/var/lib/redis owner=redis
+    tags: redis
     
   - name: copy logroate.d config
     copy: src=logrotate.d_redis_server dest=/etc/logrotate.d/redis-server
+    tags: redis
     
   - name: copy auto completion support for redis
     copy: src=redis_cli_completion dest=/etc/bash_completion.d/redis-cli
+    tags: redis
     
   - name: copy redis.conf
     copy: src=redis.conf dest=/etc/redis/redis.conf
+    tags: redis
 
   - name: copy redis-server init.d script
     copy: src=redis-server dest=/etc/init.d/redis-server
+    tags: redis
 
   - name: update-rc.d redis-server
     command: /usr/sbin/update-rc.d redis-server defaults
+    tags: redis
 
   - name: copy check-redis monit config
     copy: src=check-redis dest=/etc/monit/conf.d/check-redis
+    tags: redis
 
   - name: reload monit resource
     service: name=monit state=reloaded
+    tags: redis
 
   #- name: start redis service
   #  service: name=redis-server state=started

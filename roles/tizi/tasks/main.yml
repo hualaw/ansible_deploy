@@ -1,37 +1,45 @@
 ---
-  #- name: git checkout source code
-  #  git: repo=git@192.168.11.11:liuhua/php_91tizi.git dest=/usr/share/nginx/tizi
-
   - name: copy files
     copy: src=tizi.tar.gz dest=~/tizi.tar.gz
+    tags: tizi
 
   - name: extract files
     command: tar zxf tizi.tar.gz chdir=~
+    tags: tizi
 
   - name: rsync all files into dest
     command: rsync -avz --progress --delete --exclude="*.pyc" ./tizi /usr/share/nginx/ chdir=~
+    tags: tizi
   
   - name: copy config files
     command: /bin/cp /usr/share/nginx/tizi/application/config/online_config.php /usr/share/nginx/tizi/application/config/config.php
+    tags: tizi
 
   - name: copy database files
     command: /bin/cp /usr/share/nginx/tizi/application/config/online_database.php /usr/share/nginx/tizi/application/config/database.php
+    tags: tizi
 
   - name: ensure directory is present
     file: state=directory path=/usr/share/nginx/tizi/application/templates_c mode=0755
+    tags: tizi
     
   - name: ensure directory is present
     file: state=directory path=/usr/share/nginx/tizi/application/captcha mode=0755
+    tags: tizi
     
   - name: chown to www-data
     command: chown -R www-data:www-data /usr/share/nginx/tizi
+    tags: tizi
 
   - name: copy tizi nginx configurations
     copy: src=tizi.com dest=/etc/nginx/sites-available/tizi.com
+    tags: tizi
 
   - name: link to site-enabled
     file: src=/etc/nginx/sites-available/tizi.com dest=/etc/nginx/sites-enabled/tizi.com state=link
+    tags: tizi
 
   - name: reload nginx
     service: name=nginx state=reloaded
+    tags: tizi
 

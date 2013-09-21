@@ -5,15 +5,19 @@
       - mysql-server
       - mysql-client
       - python-mysqldb
+    tags: mysql
       
   - name: update mysql configuration
     copy: src=my.cnf dest=/etc/mysql/my.cnf
+    tags: mysql
     
   - name: restart all services
     service: name=mysql state=restarted
+    tags: mysql
 
   - name: copy monit configuration
     copy: src=check-mysql dest=/etc/monit/conf.d/check-mysql
+    tags: mysql
 
   - name: reload monit resource
     service: name=monit state=reloaded

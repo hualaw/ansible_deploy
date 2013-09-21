@@ -2,31 +2,39 @@
   - name: Install packages (for 12.04 LTS)
     apt: pkg=python-software-properties
     #apt: pkg=software-properties-common
+    tags: java
 
   - name: add Java PPA
     apt_repository: repo=ppa:webupd8team/java state=present
+    tags: java
 
   - name: automatically accept Java license
     shell: echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+    tags: java
 
   - name: install Java 7
     apt: pkg='{{ item }}' state=present update_cache=yes
     with_items:
       - oracle-java7-installer
       - oracle-java7-set-default
-    #- jython
+      #- jython
+    tags: java
 
   - name: ensure directory /tmp/java is present
     file: state=directory path=/tmp/java
+    tags: java
     
   - name: download apache ant
     get_url: url={{url}} dest=/tmp/java
+    tags: java
 
   - name: unzip apache ant {{version}}
     command: unzip -u apache-ant-{{version}}-bin.zip chdir=/tmp/java
+    tags: java
 
   - name: move ant {{version}} to /usr/local
     command: rsync -va /tmp/java/apache-ant-{{version}} /usr/local
+    tags: java
 
   - name: add {{ant_path}} to path
     lineinfile:
@@ -35,6 +43,9 @@
       backrefs=yes
       regexp='PATH=(["]*)((?!.*?{{ant_path}}).*?)(["]*)$'
       line="PATH=\1\2:{{ant_path}}\3"
+    tags: java
 
   - name: reload environment
     raw: source /etc/environment
+    tags: java
+

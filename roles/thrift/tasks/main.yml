@@ -1,7 +1,9 @@
 ---
   - name: copy thrift deb
     copy: src={{thriftdeb}} dest=/tmp/{{thriftdeb}}
+    tags: thrift
 
   - name: install thrift deb
     command: /usr/bin/dpkg -i /tmp/{{thriftdeb}}
+    tags: thrift
 

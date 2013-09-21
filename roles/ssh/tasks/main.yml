@@ -3,11 +3,14 @@
     lineinfile: dest=/etc/ssh/sshd_config 
           regexp="^#?PasswordAuthentication"
           line="PasswordAuthentication no"
+    tags: ssh
 
   - name: modify sshd_config, disabling ssh root login
     lineinfile: dest=/etc/ssh/sshd_config
           regexp="^PermitRootLogin yes"
           line="PermitRootLogin no"
+    tags: ssh
 
   - name: restart ssh service
     service: name=ssh state=restarted
+    tags: ssh
