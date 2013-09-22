@@ -13,33 +13,48 @@
        - libpcre3-dev
        - re2c
        - checkinstall
+    tags: buildthrift
 
   - name: ensure directory /tmp/thrift is present
     file: state=directory path=/tmp/thrift
+    tags: buildthrift
 
   - name: Download thrift {{oldversion}}
     get_url: url={{oldurl}} dest=/tmp/thrift
+    tags: buildthrift
 
   - name: extract thrift {{oldversion}}
     command: tar -xf thrift-{{oldversion}}.tar.gz chdir=/tmp/thrift creates={{path}}
+    tags: buildthrift
 
   - name: Download thrift {{version}}
     get_url: url={{url}} dest=/tmp/thrift
+    tags: buildthrift
 
   - name: extract thrift {{version}}
     command: tar -xf thrift-{{version}}.tar.gz chdir=/tmp/thrift creates={{path}}
+    tags: buildthrift
 
   - name: patch {{oldversion}} to {{version}}
     command: cp thrift-{{oldversion}}/lib/php/Makefile.am thrift-{{version}}/lib/php/Makefile.am chdir=/tmp/thrift
-  #  command: cp -r thrift-{{oldversion}}/lib/php/src/ext/thrift_protocol/ thrift-{{version}}/lib/php/src/ext/ chdir=/tmp/thrift
+    tags: buildthrift
+
+  - name: patch {{oldversion}} to {{version}}
+    command: cp thrift-{{oldversion}}/lib/php/Makefile.in thrift-{{version}}/lib/php/Makefile.in chdir=/tmp/thrift
+    tags: buildthrift
 
   - name: configure thrift {{version}}
     command: ./configure chdir={{path}} creates={{path}}/Makefile
+    tags: buildthrift
 
   - name: compile thrift {{version}}
     command: make chdir={{path}} creates={{path}}/compiler/cpp/thrift
+    tags: buildthrift
 
   - name: build deb packages for thrift {{version}}
     command: checkinstall -D -y --pkgname=thrift --pkgversion={{version}} --maintainer=songchuanhsheng@91waijiao.com --exclude=/proc make install chdir={{path}}
-  # result --> thrift_{{version}}-1_i386.deb
+    tags: buildthrift
+
+  - name: build deb packages for python-thrift {{version}}
+    command: checkinstall -D -y --pkgname=python-thrift --pkgversion={{version}} --maintainer=songchuanhsheng@91waijiao.com --exclude=/proc python setup.py install chdir={{path}}/lib/py
 

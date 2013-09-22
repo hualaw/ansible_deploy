@@ -1,4 +1,8 @@
 ---
+  #- name: disable apache2
+  #  service: name=apache2 enabled=no state=stopped
+  #  tags: nginx
+
   - name: Install nginx
     apt: pkg=nginx
     tags: nginx

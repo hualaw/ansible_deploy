@@ -1,5 +1,5 @@
 ---
-- hosts: tizi
+- hosts: intra
 
   user: $user
   sudo: true

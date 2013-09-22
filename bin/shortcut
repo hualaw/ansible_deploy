@@ -1,0 +1,4 @@
+#!/bin/sh
+
+alias ansible-pb-vagrant='ansible-playbook --private-key=~/.vagrant.d/insecure_private_key'
+alias ansible-pb-deploy='ansible-playbook --private-key=./ssh/ansible_id_rsa'

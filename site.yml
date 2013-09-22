@@ -10,9 +10,10 @@
     - mysql
     - nginx-php
     - oh-my-zsh
-    #- java
+    - java
     - redis
     - thrift
-    #- buildredis
-    #- buildthrift
+    - buildredis
+    - buildthrift
+    - python
 

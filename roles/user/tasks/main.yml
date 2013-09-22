@@ -1,0 +1,11 @@
+---
+  - name: create new user
+    user: name={{ newuser }} state=present
+    tags: newuser
+
+  - name: set new user authorized_key
+    authorized_key: user={{ newuser }} key="{{ item }}"
+    with_file:
+      - {{ newuser }}.id_rsa.pub
+    tags: newuser
+

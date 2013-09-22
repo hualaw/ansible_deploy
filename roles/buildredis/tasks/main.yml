@@ -10,27 +10,34 @@
        - php5-cli
        - libevent-dev
        - checkinstall
+    tags: buildredis
 
   - name: ensure directory /tmp/redis is present
     file: state=directory path=/tmp/redis
+    tags: buildredis
 
   - name: Download redis {{version}}
     get_url: url={{url}} dest=/tmp/redis
+    tags: buildredis
 
   - name: extract redis {{version}}
     command: tar -xf redis-{{version}}.tar.gz chdir=/tmp/redis creates={{path}}
+    tags: buildredis
 
   - name: compile redis {{version}}
     command: make chdir={{path}} creates={{path}}/src/redis-server
+    tags: buildredis
 
   - name: build deb packages for redis {{version}}
     command: checkinstall -D -y --pkgname=redis --pkgversion={{version}} --maintainer=songchuanhsheng@91waijiao.com make install chdir={{path}}
-  # result --> redis_{{version}}-1_i386.deb
+    tags: buildredis
 
   # TODO: add init.d scripts and checkconfig from https://github.com/tobyhede/ansible-centos-rails-nginx-passenger/blob/master/redis.yml
 
   - name: checkout phpredis
     action: git repo=https://github.com/nicolasff/phpredis.git dest=/tmp/redis/phpredis
+    tags: buildredis
 
   - name: compile phpredis
     command: ./mkdeb.sh chdir=/tmp/redis/phpredis
+    tags: buildredis

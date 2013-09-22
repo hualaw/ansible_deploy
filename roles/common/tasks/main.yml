@@ -8,6 +8,12 @@
   - name: set timezone
     command: echo "Asia/Shanghai" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 
+  - name: set locale to en_us
+    copy: src=locale dest=/etc/default/locale
+
+  - name: reconfigure locales
+    command: dpkg-reconfigure -f noninteractive locales
+    
   - name: update sources.list
     template: src=sources.list.j2 dest=/etc/apt/sources.list backup=yes
 
