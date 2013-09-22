@@ -96,6 +96,7 @@ def generate_user(username, passwd=None, sshpasswd=None):
 
 def main():
     generate_user(FLAGS.user, FLAGS.passwd, FLAGS.sshpasswd)
+    # run ansible-playbook -vvv --private-key=./ssh/ansible_id_rsa -i production --tags newuser --limit intra site.yml
 
 if __name__ == "__main__":
     try:
@@ -104,3 +105,4 @@ if __name__ == "__main__":
         print '%s\\nUsage: %s ARGS\\n%s' % (e, sys.argv[0], FLAGS)
         sys.exit(1)
     main()
+

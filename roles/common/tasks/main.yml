@@ -60,3 +60,42 @@
     service: name=monit state=reloaded
     tags: monit
 
+  - name: tweak port listen length
+    sysctl: name=net.core.somaxconn value=65536 state=present
+    tags: sysctl
+
+  - name: tweak receive backlog
+    sysctl: name=net.core.netdev_max_backlog value=600000 state=present
+    tags: sysctl
+
+  - name: tweak socket receive buffer
+    sysctl: name=net.core.rmem_max value=167772160 state=present
+    tags: sysctl
+    
+  - name: tweak socket write buffer
+    sysctl: name=net.core.wmem_max value=167772160 state=present
+    tags: sysctl
+
+  - name: tweak max tcp receive buffer
+    sysctl: name=net.ipv4.tcp_rmem value="16777216 16777216 16777216" state=present
+    tags: sysctl
+    
+  - name: tweak max tcp write buffer
+    sysctl: name=net.ipv4.tcp_wmem value="16777216 16777216 16777216" state=present
+    tags: sysctl
+
+  - name: tweak selective ack
+    sysctl: name=net.ipv4.tcp_sack value=0 state=present
+    tags: sysctl
+
+  - name: tweak tcp syn cookies
+    sysctl: name=net.ipv4.tcp_syncookies value=1 state=present
+    tags: sysctl
+
+  - name: tweak fin timeout
+    sysctl: name=net.ipv4.tcp_fin_timeout value=15 state=present
+    tags: sysctl
+
+  #- name: tewak net connection track
+  #  sysctl: name=net.netfilter.nf_conntrack_max value=6553600 state=present
+  #  tags: sysctl
