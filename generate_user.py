@@ -1,18 +1,22 @@
-
-from passlib.hash import sha256_crypt
+#!/usr/bin/env python
+import os
 import gflags
-
+import sys
+import shutil
 import string
 from time import time
 from itertools import chain
 from random import seed, choice, sample
+from subprocess import Popen, PIPE
+from passlib.hash import sha256_crypt
 
 FLAGS=gflags.FLAGS
 
 gflags.DEFINE_boolean('gensshkey', True, 'Auto generate ssh key for user')
 gflags.DEFINE_string('user', 'waijiao', 'username', short_name='u')
 gflags.DEFINE_string('passwd', '', 'password, leave empty will generate random password', short_name='p')
-gflags.DEFINE_string('key', '', 'public key file', short_name='k')
+gflags.DEFINE_string('sshpasswd', '', 'ssh password, leave empty will generate random password', short_name='s')
+gflags.DEFINE_string('pubkey', '', 'public key file', short_name='k')
 
 def mkpasswd(length=8, digits=2, upper=2, lower=2):
     """Create a random password
@@ -53,23 +57,43 @@ def mkpasswd(length=8, digits=2, upper=2, lower=2):
 
     return "".join(sample(password, len(password)))
 
-def generate_user(username, passwd=None):
+def generate_user(username, passwd=None, sshpasswd=None):
+    os.system('mkdir -p roles/user/vars')
+    os.system('mkdir -p roles/user/files')
+    os.system('mkdir -p key')
     if not passwd:
         passwd = mkpasswd()
+    if not sshpasswd:
+        sshpasswd = mkpasswd()
     crypted_passwd = sha256_crypt.encrypt(passwd)
-    if not passwd:
-        print "Auto genrated passwd for user %s is: %s" % (username, passwd)
+    print "passwd for user %s is: %s , ssh passwd is %s" % (username, passwd, sshpasswd)
     # generate roles/user/files/main.yml
-    f = open("", "w")
+    f = open("roles/user/vars/main.yml", "w")
     s = "newuser: %s\npasswd: %s" % (username, crypted_passwd)
     f.write(s)
     f.close()
     if FLAGS.gensshkey:
-        pass
-    # copy ssh key to roles/user/files/{{user}}.id_rsa.pub
+        try:
+            os.remove('key/%s_id_rsa' % username)
+        except:
+            pass
+        try:
+            os.remove('key/%s_id_rsa.pub' % username)
+        except:
+            pass
+        p = Popen(['ssh-keygen', '-N', sshpasswd, '-f', 'key/%s_id_rsa' % username], stdout=PIPE)
+        out = p.communicate()[0]
+        if p.returncode != 0:
+            print 'ssh-key failed, %s' % out
+            sys.exit(-1)
+        pubkey_file = 'key/%s_id_rsa.pub' % username
+    else:
+        pubkey_file = FLAGS.pubkey
+    # copy ssh key to roles/user/files/id_rsa.pub
+    shutil.copy(pubkey_file, 'roles/user/files/id_rsa.pub')
 
 def main():
-    generate_user(FLAGS.user, FLAGS.passwd)
+    generate_user(FLAGS.user, FLAGS.passwd, FLAGS.sshpasswd)
 
 if __name__ == "__main__":
     try:

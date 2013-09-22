@@ -16,4 +16,5 @@
     - buildredis
     - buildthrift
     - python
+    - user
 
