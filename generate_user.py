@@ -18,7 +18,7 @@ gflags.DEFINE_string('passwd', '', 'password, leave empty will generate random p
 gflags.DEFINE_string('sshpasswd', '', 'ssh password, leave empty will generate random password', short_name='s')
 gflags.DEFINE_string('pubkey', '', 'public key file', short_name='k')
 
-def mkpasswd(length=8, digits=2, upper=2, lower=2):
+def mkpasswd(length=8, digits=2, upper=2, special=2, lower=2):
     """Create a random password
 
     Create a random password with the specified length and no. of
@@ -45,13 +45,15 @@ def mkpasswd(length=8, digits=2, upper=2, lower=2):
     lowercase = string.lowercase.translate(None, "o")
     uppercase = string.uppercase.translate(None, "O")
     letters = "{0:s}{1:s}".format(lowercase, uppercase)
+    specials = "~!@#$%^&*():<>?,./;`_+|{}[]"
 
     password = list(
         chain(
             (choice(uppercase) for _ in range(upper)),
             (choice(lowercase) for _ in range(lower)),
             (choice(string.digits) for _ in range(digits)),
-            (choice(letters) for _ in range((length - digits - upper - lower)))
+            (choice(specials) for _ in range(special)),
+            (choice(letters) for _ in range((length - digits - upper - lower - special)))
         )
     )
 
