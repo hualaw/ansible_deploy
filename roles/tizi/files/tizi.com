@@ -4,7 +4,7 @@ upstream tizi {
 
 server {
     listen 80;
-    server_name *.tizi.com;
+    server_name *.tizi.com 121.199.20.59;
 
     allow all;
     deny all;

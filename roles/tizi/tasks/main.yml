@@ -19,12 +19,20 @@
     command: /bin/cp /usr/share/nginx/tizi/application/config/online_database.php /usr/share/nginx/tizi/application/config/database.php
     tags: tizi
 
+  - name: copy database files
+    command: /bin/cp /usr/share/nginx/tizi/application/config/online_redis.php /usr/share/nginx/tizi/application/config/redis.php
+    tags: tizi
+    
   - name: ensure directory is present
     file: state=directory path=/usr/share/nginx/tizi/application/templates_c mode=0755
     tags: tizi
     
   - name: ensure directory is present
     file: state=directory path=/usr/share/nginx/tizi/application/captcha mode=0755
+    tags: tizi
+    
+  - name: empty templates_c caches
+    command: /bin/rm -f /usr/share/nginx/tizi/application/templates_c/*
     tags: tizi
     
   - name: chown to www-data
