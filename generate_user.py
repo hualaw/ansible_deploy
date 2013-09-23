@@ -68,7 +68,7 @@ def generate_user(username, passwd=None, sshpasswd=None):
     if not sshpasswd:
         sshpasswd = mkpasswd()
     crypted_passwd = sha256_crypt.encrypt(passwd)
-    print "passwd for user %s is: %s , ssh passwd is %s" % (username, passwd, sshpasswd)
+    print "passwd for user %s is: %s , ssh private key passwd is %s" % (username, passwd, sshpasswd)
     # generate roles/user/files/main.yml
     f = open("roles/user/vars/main.yml", "w")
     s = "newuser: %s\npasswd: %s" % (username, crypted_passwd)
@@ -105,4 +105,3 @@ if __name__ == "__main__":
         print '%s\\nUsage: %s ARGS\\n%s' % (e, sys.argv[0], FLAGS)
         sys.exit(1)
     main()
-

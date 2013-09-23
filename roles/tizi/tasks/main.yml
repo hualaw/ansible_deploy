@@ -15,12 +15,20 @@
     command: /bin/cp /usr/share/nginx/tizi/application/config/online_config.php /usr/share/nginx/tizi/application/config/config.php
     tags: tizi
 
-  - name: copy database files
+  - name: copy database config files
     command: /bin/cp /usr/share/nginx/tizi/application/config/online_database.php /usr/share/nginx/tizi/application/config/database.php
     tags: tizi
 
-  - name: copy database files
+  - name: copy redis config files
     command: /bin/cp /usr/share/nginx/tizi/application/config/online_redis.php /usr/share/nginx/tizi/application/config/redis.php
+    tags: tizi
+    
+  - name: copy download config files
+    command: /bin/cp /usr/share/nginx/tizi/application/config/online_download.php /usr/share/nginx/tizi/application/config/download.php
+    tags: tizi
+    
+  - name: copy sms config files
+    command: /bin/cp /usr/share/nginx/tizi/application/config/online_sms.php /usr/share/nginx/tizi/application/config/sms.php
     tags: tizi
     
   - name: ensure directory is present
