@@ -15,6 +15,14 @@
     copy: src=chap-secrets dest=/etc/ppp/chap-secrets backup=yes
     tags: pppd
 
+  - name: creating a firewall, copy iptables.firewall.rules
+    copy: src=iptables.pptpd.rules dest=/etc/iptables.firewall.rules
+    tags: pppd
+
+  - name: apply firewall rules
+    command: /etc/network/if-pre-up.d/firewall
+    tags: pppd
+    
   - name: set sysctl rule net.ipv4.ip_forward to 1
     sysctl: name=net.ipv4.ip_forward value=1 state=present
     tags: pppd
