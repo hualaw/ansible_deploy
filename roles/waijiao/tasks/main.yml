@@ -8,11 +8,11 @@
     tags: waijiao
 
   - name: rsync all files into dest
-    command: rsync -avz --progress --delete --exclude="*.pyc" ./waijiao /usr/share/nginx/ chdir=~
+    command: rsync -avz --progress --delete --exclude="*.pyc" ./waijiao /space/ chdir=~
     tags: waijiao
   
   - name: chown to www-data
-    command: chown -R www-data:www-data /usr/share/nginx/waijiao
+    command: chown -R www-data:www-data /space/waijiao
     tags: waijiao
 
   - name: copy waijiao nginx configurations

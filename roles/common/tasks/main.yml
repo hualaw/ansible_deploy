@@ -45,13 +45,16 @@
        - most
        - ncdu
        - unzip
-       - monit
        - fail2ban
 
   - name: copy tumx config
     sudo: False
     copy: src=.tmux.conf dest=~/.tmux.conf
     
+  - name: install monit
+    apt: pkg=monit
+    tags: monit
+
   - name: copy monit configuration
     copy: src=monitrc dest=/etc/monit/monitrc
     tags: monit
