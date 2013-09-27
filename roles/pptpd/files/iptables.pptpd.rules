@@ -1,0 +1,69 @@
+*filter
+
+# TODO:
+#:INPUT ACCEPT [0:0]
+#:FORWARD ACCEPT [0:0]
+#:OUTPUT ACCEPT [0:0]
+
+# Allow all loopback (lo0) traffic and drop all traffic to 127/8 that doesn't use lo0
+-A INPUT -i lo -j ACCEPT
+-A INPUT -d 127.0.0.0/8 -j REJECT
+
+# Allow ping
+-A INPUT -p icmp -j ACCEPT
+
+# Accept all established inbound connections
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Allow all outbound traffic - you can modify this to only allow certain traffic
+-A OUTPUT -j ACCEPT
+
+# reject any inproper flags
+-A INPUT -p tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG NONE -j REJECT
+-A INPUT -p tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG FIN,SYN,RST,PSH,ACK,URG -j REJECT
+-A INPUT -p tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG FIN,PSH,URG -j REJECT
+-A INPUT -p tcp --tcp-flags FIN,SYN FIN,SYN -j REJECT
+-A INPUT -p tcp --tcp-flags SYN,RST SYN,RST -j REJECT
+-A INPUT -p tcp --tcp-flags FIN,RST FIN,RST -j REJECT
+-A INPUT -p tcp --tcp-flags FIN,ACK FIN -j REJECT
+-A INPUT -p tcp --tcp-flags PSH,ACK PSH -j REJECT
+-A INPUT -p tcp --tcp-flags ACK,URG URG -j REJECT
+
+# Allow HTTP and HTTPS connections from anywhere (the normal ports for websites and SSL).
+-A INPUT -p tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp --dport 443 -j ACCEPT
+
+# enable pptpd options
+-A INPUT -i ppp+ -j ACCEPT
+-A OUTPUT -o ppp+ -j ACCEPT
+
+-A INPUT -p tcp --dport 1723 -j ACCEPT
+-A INPUT -p 47 -j ACCEPT
+-A OUTPUT -p 47 -j ACCEPT
+
+-F FORWARD
+-A FORWARD -j ACCEPT
+
+#  Allow SSH connections
+#
+#  The -dport number should be the same port number you set in sshd_config
+#
+-A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
+
+# Log denied calls
+-A INPUT -m limit --limit 5/min -j LOG --log-prefix "denied: " --log-level 7
+
+# Drop all other inbound - default deny unless explicitly allowed policy
+-A INPUT -j DROP
+-A FORWARD -j DROP
+#-A INPUT -j REJECT --reject-with icmp-host-prohibited
+
+COMMIT
+
+*nat
+
+-A POSTROUTING -o eth0 -j MASQUERADE
+-A POSTROUTING -o ppp+ -j MASQUERADE
+
+COMMIT
+

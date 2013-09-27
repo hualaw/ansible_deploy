@@ -31,6 +31,8 @@ BRANCH=master
 TAG=waijiao
 LIMIT=waijiao-webserver
 
+servers=(www2.91peilian.com)
+
 while getopts "hp:g:i:k:t:l:b:" OPTION
 do
   case $OPTION in
@@ -67,5 +69,10 @@ LOCAL_PATH=./local/$PACKAGE
 . $DIR/functions
 
 checkout $GIT_REPO $LOCAL_PATH $BRANCH
-build_package $PACKAGE $LOCAL_PATH 
+#build_package $PACKAGE $LOCAL_PATH 
+# rsync to servers
+for server in ${servers[@]}; do
+  rsync_package deploy $server /space1 $LOCAL_PATH
+done
 install_package $PACKAGE $SSHKEY $INVENTORY $TAG $LIMIT
+

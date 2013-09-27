@@ -67,6 +67,7 @@ LOCAL_PATH=./local/$PACKAGE
 . $DIR/functions
 
 checkout $GIT_REPO $LOCAL_PATH $BRANCH
+#rsync_package 
 build_package $PACKAGE $LOCAL_PATH 
 install_package $PACKAGE $SSHKEY $INVENTORY $TAG $LIMIT
 
