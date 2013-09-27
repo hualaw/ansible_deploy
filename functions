@@ -59,6 +59,14 @@ rsync_package() {
 #   install_package packagename sshkey inventoryfile
 #########################################
 install_package() {
-  ANSIBLE_MODULE_LANG=en_US.UTF-8 ansible-playbook -v --private-key=$2 -i $3 $1.yml
+  TAG_PARA=
+  LIMIT_PARA=
+  if [ ! -z "$4" ]; then
+    TAG_PARA="--tags $4"
+  fi
+  if [ ! -z "$5" ]; then
+    LIMIT_PARA="--limit $5"
+  fi
+  ANSIBLE_MODULE_LANG=en_US.UTF-8 ansible-playbook -v --private-key=$2 -i $3 $TAG_PARA $LIMIT_PARA $1.yml
 }
 
