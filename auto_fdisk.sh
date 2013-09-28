@@ -128,17 +128,18 @@ main()
   mount -a
 }
 
-#========= move /var to /space1 ====
-rsync -va /var/ /space1
-/bin/rm -rf /var.bak
-mv /var /var.bak
-mkdir /var
-mount -o bind /space1/var /var
-echo "/space1/var /var none bind" >> $fstab_file
-
 #=========start script===========
 echo -e "\033[40;32mStep 2.Begin to check free disk.\033[40;37m"
 check_disk
 main
 df -h
+
+#========= move /var to /space1 ====
+rsync -va /var/ /space1/var
+#/bin/rm -rf /var.bak
+mv /var /var.bak
+mkdir /var
+mount -o bind /space1/var /var
+echo "/space1/var /var none bind" >> $fstab_file
+
 rm -rf $LOCKfile $tmp1 $tmp2
