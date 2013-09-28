@@ -19,6 +19,11 @@ app-webserver
 jumpbox
 
 [intra-server]
+192.168.11.74
+#192.168.11.20
+#192.168.11.19
+#192.168.11.12
+#192.168.11.17
 192.168.11.75
 
 [vagrant-testserver]
@@ -37,3 +42,8 @@ vagrant-testserver
 [intra:children]
 intra-server
 
+[test]
+192.168.11.75
+
+[news]
+220.181.167.131
