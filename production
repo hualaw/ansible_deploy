@@ -1,11 +1,12 @@
 [tizi-webserver]
-121.199.20.59
+112.124.62.2
 
 [waijiao-webserver]
 www.91waijiao.com
 
 [intra-server]
-192.168.11.20
+192.168.11.74
+#192.168.11.20
 #192.168.11.19
 #192.168.11.12
 #192.168.11.17
@@ -15,6 +16,7 @@ www.91waijiao.com
 
 [tizi:children]
 tizi-webserver
+
 
 [webserver:children]
 tizi-webserver
@@ -26,3 +28,8 @@ vagrant-testserver
 [intra:children]
 intra-server
 
+[test]
+192.168.11.75
+
+[news]
+220.181.167.131

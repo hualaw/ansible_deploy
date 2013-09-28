@@ -1,0 +1,14 @@
+---
+- hosts: news
+
+  user: $user
+  sudo: true
+
+  roles:
+    - common
+    - ssh
+#    - oh-my-zsh
+    - python
+    #- java
+    #- buildredis
+    #- buildthrift

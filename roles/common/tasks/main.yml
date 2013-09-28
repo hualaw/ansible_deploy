@@ -26,13 +26,16 @@
 
   - name: creating a firewall, copy iptables.firewall.rules
     copy: src=iptables.firewall.rules dest=/etc/iptables.firewall.rules
+    tags: firewall
 
   - name: creating a firewall, copy firewall
     copy: src=firewall dest=/etc/network/if-pre-up.d/firewall mode=755
+    tags: firewall
 
   - name: apply firewall rules
     command: /etc/network/if-pre-up.d/firewall
-
+    tags: firewall
+    
   - name: Install common tools (git vim ntp curl tmux ack most ncdu unzip monit fail2ban)
     apt: pkg={{item}}
     with_items:
@@ -51,7 +54,7 @@
   - name: copy tumx config
     sudo: False
     copy: src=.tmux.conf dest=~/.tmux.conf
-    
+
   - name: copy monit configuration
     copy: src=monitrc dest=/etc/monit/monitrc
     tags: monit
@@ -99,3 +102,4 @@
   #- name: tewak net connection track
   #  sysctl: name=net.netfilter.nf_conntrack_max value=6553600 state=present
   #  tags: sysctl
+
