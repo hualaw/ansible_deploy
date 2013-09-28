@@ -4,12 +4,12 @@ upstream waijiao {
 
 server {
     listen 80;
-    server_name *.91waijiao.com;
+    server_name *.91waijiao.com 121.124.41.101 *.91peilian.com;
 
     allow all;
     deny all;
 
-    root /usr/share/nginx/waijiao/webroot;
+    root /space/waijiao/webroot;
 
     index index.html index.htm index.php;
 

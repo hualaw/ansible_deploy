@@ -1,5 +1,5 @@
 ---
-- hosts: intra
+- hosts: all
 
   user: $user
   sudo: true

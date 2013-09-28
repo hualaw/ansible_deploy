@@ -1,8 +1,22 @@
 [tizi-webserver]
-112.124.62.2
+121.199.20.59:9191
+112.124.62.2:9191
 
 [waijiao-webserver]
-www.91waijiao.com
+#42.121.114.19
+112.124.41.101
+
+[app-webserver]
+112.124.10.19
+
+[jumpbox]
+112.124.59.187
+
+[aliyun:children]
+tizi-webserver
+waijiao-webserver
+app-webserver
+jumpbox
 
 [intra-server]
 192.168.11.74
@@ -10,13 +24,13 @@ www.91waijiao.com
 #192.168.11.19
 #192.168.11.12
 #192.168.11.17
+192.168.11.75
 
 [vagrant-testserver]
 192.168.91.8
 
 [tizi:children]
 tizi-webserver
-
 
 [webserver:children]
 tizi-webserver

@@ -7,19 +7,26 @@
 
   - name: set timezone
     command: echo "Asia/Shanghai" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+    tags: common
 
   - name: set locale to en_us
     copy: src=locale dest=/etc/default/locale
+    tags: common
 
   - name: reconfigure locales
     command: dpkg-reconfigure -f noninteractive locales
+    when: "ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'precise'"
+    tags: common
     
   - name: update sources.list
     template: src=sources.list.j2 dest=/etc/apt/sources.list backup=yes
+    when: "ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'precise'"
+    tags: common
 
   - name: Upgrade apt packages
-    apt: upgrade=yes
-         update_cache=yes
+    apt: upgrade=yes update_cache=yes
+    when: "ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'precise'"
+    tags: common
 
   #- name: upgrade virtualbox guest if needed
   #  apt: pkg=virtualbox-guest-utils
@@ -48,12 +55,17 @@
        - most
        - ncdu
        - unzip
-       - monit
        - fail2ban
+    tags: common
 
   - name: copy tumx config
     sudo: False
     copy: src=.tmux.conf dest=~/.tmux.conf
+    tags: common
+    
+  - name: install monit
+    apt: pkg=monit
+    tags: monit
 
   - name: copy monit configuration
     copy: src=monitrc dest=/etc/monit/monitrc

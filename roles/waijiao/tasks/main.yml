@@ -1,19 +1,28 @@
 ---
-  - name: copy files
-    copy: src=waijiao.tar.gz dest=~/waijiao.tar.gz
-    tags: waijiao
+  #- name: copy files
+  #  copy: src=waijiao.tar.gz dest=~/waijiao.tar.gz
+  #  tags: waijiao
 
-  - name: extract files
-    command: tar zxf waijiao.tar.gz chdir=~
-    tags: waijiao
+  #- name: extract files
+  #  command: tar zxf waijiao.tar.gz chdir=~
+  #  tags: waijiao
 
-  - name: rsync all files into dest
-    command: rsync -avz --progress --delete --exclude="*.pyc" ./waijiao /usr/share/nginx/ chdir=~
-    tags: waijiao
+  #- name: rsync all files into dest
+  #  command: rsync -avz --progress --delete --exclude="*.pyc" ./waijiao /space/ chdir=~
+  #  tags: waijiao
   
-  - name: chown to www-data
-    command: chown -R www-data:www-data /usr/share/nginx/waijiao
+  - name: ensure deploy user in www-data group
+    user: name=deploy groups=sudo,www-data group=deploy
     tags: waijiao
+
+  - name: ensure /space1/waijiao path
+    file: state=directory path=/space1/waijiao owner=www-data group=deploy mode=0770
+    tags: waijiao
+        
+  #- name: rsync all files from jumpbox to dest
+  #  sudo: False
+  #  shell: rsync -avz --progress --delete --exclude="*.pyc" --exclude=".git*" deploy@112.124.59.187:/space1/waijiao /space1/
+  #  tags: waijiao
 
   - name: copy waijiao nginx configurations
     copy: src=91waijiao.com dest=/etc/nginx/sites-available/91waijiao.com

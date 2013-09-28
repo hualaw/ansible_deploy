@@ -9,10 +9,10 @@
     - ssh
     - mysql
     - nginx-php
-    - oh-my-zsh
     #- java
     - redis
     - thrift
+    - oh-my-zsh
     #- buildredis
     #- buildthrift
 
