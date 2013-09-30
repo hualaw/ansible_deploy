@@ -8,7 +8,7 @@ PROG=`basename $0`
 usage() {
   cat <<EOF
 usage:
-  $PROG -p package -b branch -g git_repo -k sshkey -i inventory_file -t ansible_tag
+  $PROG -p package -b branch -g git_repo -k sshkey -i inventory_file -t ansible_tag -u deploy_user
 
 OPTIONS:
   -p   package name
@@ -30,10 +30,10 @@ BRANCH=master
 TAG=waijiao
 LIMIT=waijiao-webserver
 
-DEPLOY_USER=deploy
+DEPLOY_USER=lijie
 SERVERS=(112.124.41.101)
 
-while getopts "hp:g:i:k:t:b:" OPTION
+while getopts "hp:g:i:k:t:b:u:" OPTION
 do
   case $OPTION in
     p)
@@ -54,6 +54,9 @@ do
     t)
       TAG=$OPTARG
       ;;
+    u)
+      DEPLOY_USER=$OPTARG
+      ;;
     h)
       usage
       exit 1
@@ -66,8 +69,6 @@ LOCAL_PATH=./local/$PACKAGE
 . $DIR/functions
 
 checkout $GIT_REPO $LOCAL_PATH $BRANCH
-#build_package $PACKAGE $LOCAL_PATH 
-# rsync to servers
 for server in ${SERVERS[@]}; do
   rsync_package $DEPLOY_USER $server /home/$DEPLOY_USER $LOCAL_PATH
   install_waijiao_manual 22 $DEPLOY_USER $server $LOCAL_PATH $PACKAGE

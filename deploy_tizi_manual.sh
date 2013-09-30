@@ -8,7 +8,7 @@ PROG=`basename $0`
 usage() {
   cat <<EOF
 usage:
-  $PROG -p package -b branch -g git_repo -k sshkey -i inventory_file -l limit_hosts -t ansible_tag
+  $PROG -p package -b branch -g git_repo -k sshkey -i inventory_file -l limit_hosts -t ansible_tag -u deploy_user
 
 OPTIONS:
   -p   package name
@@ -31,7 +31,10 @@ BRANCH=master
 TAG=tizi
 LIMIT=tizi-webserver
 
-while getopts "hp:g:i:k:t:l:b:" OPTION
+DEPLOY_USER=waijiao
+SERVERS=(121.199.20.59)
+
+while getopts "hp:g:i:k:t:l:b:u:" OPTION
 do
   case $OPTION in
     p)
@@ -55,6 +58,9 @@ do
     t)
       TAG=$OPTARG
       ;;
+    u)
+      DEPLOY_USER=$OPTARG
+      ;;
     h)
       usage
       exit 1
@@ -67,6 +73,7 @@ LOCAL_PATH=./local/$PACKAGE
 . $DIR/functions
 
 checkout $GIT_REPO $LOCAL_PATH $BRANCH
-build_package $PACKAGE $LOCAL_PATH 
-install_package_manual 9191 waijiao 121.199.20.59 $LOCAL_PATH $PACKAGE
-
+for server in ${SERVERS[@]}; do
+  rsync_package $DEPLOY_USER $server /home/$DEPLOY_USER $LOCAL_PATH
+  install_tizi_manual 9191 $DEPLOY_USER $server $LOCAL_PATH $PACKAGE
+done

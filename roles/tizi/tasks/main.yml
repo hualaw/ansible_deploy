@@ -1,14 +1,14 @@
 ---
-  - name: copy files
-    copy: src=tizi.tar.gz dest=~/tizi.tar.gz
-    tags: tizi
+  #- name: copy files
+  #  copy: src=tizi.tar.gz dest=~/tizi.tar.gz
+  #  tags: tizi
 
-  - name: extract files
-    command: tar zxf tizi.tar.gz chdir=~
-    tags: tizi
+  #- name: extract files
+  #  command: tar zxf tizi.tar.gz chdir=~
+  #  tags: tizi
 
   - name: rsync all files into dest
-    command: rsync -avz --progress --delete --exclude="*.pyc" ./tizi /space1/ chdir=~
+    command: rsync -avz --progress --delete --exclude="*.pyc" /home/$user/tizi /space1/ chdir=~
     tags: tizi
   
   - name: copy config files

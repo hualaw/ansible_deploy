@@ -7,9 +7,9 @@
   #  command: tar zxf waijiao.tar.gz chdir=~
   #  tags: waijiao
 
-  #- name: rsync all files into dest
-  #  command: rsync -avz --progress --delete --exclude="*.pyc" ./waijiao /space/ chdir=~
-  #  tags: waijiao
+  - name: rsync all files into dest
+    command: rsync -avz --progress --delete --exclude="*.pyc" /home/$user/waijiao /space1/ chdir=~
+    tags: waijiao
   
   - name: ensure deploy user in www-data group
     user: name=deploy groups=sudo,www-data group=deploy
@@ -19,11 +19,6 @@
     file: state=directory path=/space1/waijiao owner=www-data group=deploy mode=0770
     tags: waijiao
         
-  #- name: rsync all files from jumpbox to dest
-  #  sudo: False
-  #  shell: rsync -avz --progress --delete --exclude="*.pyc" --exclude=".git*" deploy@112.124.59.187:/space1/waijiao /space1/
-  #  tags: waijiao
-
   - name: copy waijiao nginx configurations
     copy: src=91waijiao.com dest=/etc/nginx/sites-available/91waijiao.com
     tags: waijiao
