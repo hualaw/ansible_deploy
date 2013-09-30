@@ -1,6 +1,6 @@
 ---
   - name: install ppp client
-    apt: pkg=pptp-linux
+    apt: pkg=pptp-linux # binutils
     tags: pptp
 
   - name: setup ppp info
