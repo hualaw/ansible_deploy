@@ -74,7 +74,7 @@ LOCAL_PATH=./local/$PACKAGE
 
 checkout $GIT_REPO $LOCAL_PATH $BRANCH
 for server in ${SERVERS[@]}; do
-  rsync_package $DEPLOY_USER $server /home/$DEPLOY_USER $LOCAL_PATH
+  rsync_package $DEPLOY_USER $server /home/$DEPLOY_USER $LOCAL_PATH 9191
 done
 #build_package $PACKAGE $LOCAL_PATH 
 install_package $PACKAGE $SSHKEY $INVENTORY $TAG $LIMIT

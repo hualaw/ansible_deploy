@@ -39,6 +39,7 @@ build_package() {
   cd $2/..
   tar --exclude=.git* --exclude=*.tar.gz -czf $1.tar.gz $1
   popd
+  mkdir -p roles/$1/files
   /bin/cp -f $2/../$1.tar.gz roles/$1/files
 }
 
@@ -46,10 +47,10 @@ build_package() {
 # rsync_package: rsync package to remote hosts
 #
 # usage:
-#   rsync_package username remotehost remotepath localpath
+#   rsync_package username remotehost remotepath localpath ssh_port
 #########################################
 rsync_package() {
-  rsync -avz --progress --delete --exclude ".git*" --exclude "*.pyc" $4 $1@$2:$3
+  rsync -e 'ssh -p $5' -avz --progress --delete --exclude ".git*" --exclude "*.pyc" $4 $1@$2:$3
 }
 
 #########################################

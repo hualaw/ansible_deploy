@@ -32,7 +32,7 @@
   #  apt: pkg=virtualbox-guest-utils
 
   - name: creating a firewall, copy iptables.firewall.rules
-    copy: src=iptables.firewall.rules dest=/etc/iptables.firewall.rules
+    template: src=iptables.firewall.rules.j2 dest=/etc/iptables.firewall.rules
     tags: firewall
 
   - name: creating a firewall, copy firewall

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ################# checkout projects
 
@@ -70,7 +70,7 @@ LOCAL_PATH=./local/$PACKAGE
 
 checkout $GIT_REPO $LOCAL_PATH $BRANCH
 for server in ${SERVERS[@]}; do
-  rsync_package $DEPLOY_USER $server /home/$DEPLOY_USER $LOCAL_PATH
+  rsync_package $DEPLOY_USER $server /home/$DEPLOY_USER $LOCAL_PATH 22
   install_waijiao_manual 22 $DEPLOY_USER $server $LOCAL_PATH $PACKAGE
 done
 
