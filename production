@@ -16,12 +16,16 @@
 [jumpbox]
 112.124.59.187
 
+[sms]
+10.160.29.246
+
 [aliyun:children]
 tizi-webserver
 waijiao-webserver
 app-webserver
 jumpbox
 tizi-redis
+sms
 
 [intra-server]
 192.168.11.75
