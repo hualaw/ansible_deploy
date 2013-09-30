@@ -9,7 +9,7 @@ server {
     allow all;
     deny all;
 
-    root /usr/share/nginx/tizi;
+    root /space1/tizi;
 
     index index.html index.htm index.php;
 

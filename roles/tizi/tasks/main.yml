@@ -8,43 +8,47 @@
     tags: tizi
 
   - name: rsync all files into dest
-    command: rsync -avz --progress --delete --exclude="*.pyc" ./tizi /space/ chdir=~
+    command: rsync -avz --progress --delete --exclude="*.pyc" ./tizi /space1/ chdir=~
     tags: tizi
   
   - name: copy config files
-    command: /bin/cp /space/tizi/application/config/online_config.php /space/tizi/application/config/config.php
+    command: /bin/cp /space1/tizi/application/config/online_config.php /space1/tizi/application/config/config.php
     tags: tizi
 
   - name: copy database config files
-    command: /bin/cp /space/tizi/application/config/online_database.php /space/tizi/application/config/database.php
+    command: /bin/cp /space1/tizi/application/config/online_database.php /space1/tizi/application/config/database.php
     tags: tizi
 
   - name: copy redis config files
-    command: /bin/cp /space/tizi/application/config/online_redis.php /space/tizi/application/config/redis.php
+    command: /bin/cp /space1/tizi/application/config/online_redis.php /space1/tizi/application/config/redis.php
     tags: tizi
     
   - name: copy download config files
-    command: /bin/cp /space/tizi/application/config/online_download.php /space/tizi/application/config/download.php
+    command: /bin/cp /space1/tizi/application/config/online_download.php /space1/tizi/application/config/download.php
     tags: tizi
     
   - name: copy sms config files
-    command: /bin/cp /space/tizi/application/config/online_sms.php /space/tizi/application/config/sms.php
+    command: /bin/cp /space1/tizi/application/config/online_sms.php /space1/tizi/application/config/sms.php
+    tags: tizi
+    
+  - name: copy thrift config files
+    command: /bin/cp /space1/tizi/application/config/online_thrift.php /space1/tizi/application/config/thrift.php
     tags: tizi
     
   - name: ensure directory is present
-    file: state=directory path=/space/tizi/application/templates_c mode=0755
+    file: state=directory path=/space1/tizi/application/templates_c mode=0755
     tags: tizi
     
   - name: ensure directory is present
-    file: state=directory path=/space/tizi/application/captcha mode=0755
+    file: state=directory path=/space1/tizi/application/captcha mode=0755
     tags: tizi
     
   - name: empty templates_c caches
-    command: /bin/rm -f /space/tizi/application/templates_c/*
+    command: /bin/rm -f /space1/tizi/application/templates_c/*
     tags: tizi
     
   - name: chown to www-data
-    command: chown -R www-data:www-data /space/tizi
+    command: chown -R www-data:www-data /space1/tizi
     tags: tizi
 
   - name: copy tizi nginx configurations

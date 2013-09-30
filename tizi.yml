@@ -5,4 +5,7 @@
   sudo: true
 
   roles:
+    - ssh
+    - common
+    - python
     - tizi

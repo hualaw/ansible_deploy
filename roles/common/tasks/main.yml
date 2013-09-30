@@ -33,16 +33,16 @@
 
   - name: creating a firewall, copy iptables.firewall.rules
     copy: src=iptables.firewall.rules dest=/etc/iptables.firewall.rules
-    tags: common
+    tags: firewall
 
   - name: creating a firewall, copy firewall
     copy: src=firewall dest=/etc/network/if-pre-up.d/firewall mode=755
-    tags: common
+    tags: firewall
 
   - name: apply firewall rules
     command: /etc/network/if-pre-up.d/firewall
-    tags: common
-
+    tags: firewall
+    
   - name: Install common tools (git vim ntp curl tmux ack most ncdu unzip monit fail2ban)
     apt: pkg={{item}}
     with_items:
@@ -114,3 +114,4 @@
   #- name: tewak net connection track
   #  sysctl: name=net.netfilter.nf_conntrack_max value=6553600 state=present
   #  tags: sysctl
+
