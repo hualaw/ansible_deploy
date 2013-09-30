@@ -30,6 +30,7 @@ BRANCH=master
 TAG=waijiao
 LIMIT=waijiao-webserver
 
+DEPLOY_USER=deploy
 SERVERS=(112.124.41.101)
 
 while getopts "hp:g:i:k:t:b:" OPTION
@@ -68,7 +69,7 @@ checkout $GIT_REPO $LOCAL_PATH $BRANCH
 #build_package $PACKAGE $LOCAL_PATH 
 # rsync to servers
 for server in ${SERVERS[@]}; do
-  rsync_package deploy $server /space1 $LOCAL_PATH
+  rsync_package $DEPLOY_USER $server /home/$DEPLOY_USER $LOCAL_PATH
+  install_waijiao_manual 22 $DEPLOY_USER $server $LOCAL_PATH $PACKAGE
 done
-install_package $PACKAGE $SSHKEY $INVENTORY $TAG $LIMIT
 
