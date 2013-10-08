@@ -50,7 +50,7 @@ build_package() {
 #   rsync_package username remotehost remotepath localpath ssh_port
 #########################################
 rsync_package() {
-  rsync -e 'ssh -p $5' -avz --progress --delete --exclude ".git*" --exclude "*.pyc" $4 $1@$2:$3
+  rsync -e "ssh -p $5" -avz --progress --delete --exclude ".git*" --exclude "*.pyc" $4 $1@$2:$3
 }
 
 #########################################
