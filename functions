@@ -91,3 +91,26 @@ install_waijiao_manual() {
   ssh -p $1 $2@$3 -t "sudo su -c 'rsync -avz --progress --delete /home/$2/$5 /space1/;chown -R www-data:www-data /space1/$5;/etc/init.d/nginx reload'"
 }
 
+#########################################
+# compress: use yuicompressor to compress all js and css files
+#
+# usage:
+#   compress zujuan_teacher_git_root_path
+#########################################
+compress() {
+  if [ $# -gt 0 ] && [ -d $1 ];then
+    for file in `find $1 -name "*.js"`
+      do
+	java -jar ./bin/yuicompressor-2.4.8.jar $file > $file.yui
+        #mv $file.yui $file
+      done
+		
+    for file in `find $1 -name "*.css"`
+      do
+        java -jar ./bin/yuicompressor-2.4.8.jar $file > $file.yui
+        #mv $file.yui $file
+    done
+  else
+    echo 'Usage: compress [zujuan_teacher_path]'
+  fi
+}
