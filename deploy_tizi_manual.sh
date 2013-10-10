@@ -79,9 +79,8 @@ LOCAL_PATH=./local/$PACKAGE
 
 checkout $GIT_REPO $LOCAL_PATH $BRANCH
 if [ $COMPRESS -eq 1 ]; then
-	compress $LOCAL_PATH
+  compress_cssjs $LOCAL_PATH
 fi
-exit 0
 for server in ${SERVERS[@]}; do
   rsync_package $DEPLOY_USER $server /home/$DEPLOY_USER $LOCAL_PATH 9191
   install_tizi_manual 9191 $DEPLOY_USER $server $LOCAL_PATH $PACKAGE

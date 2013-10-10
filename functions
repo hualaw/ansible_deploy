@@ -88,7 +88,7 @@ install_tizi_manual() {
 #   install_waijiao_manual ssh_port ssh_user host_ip local_path package_name
 #########################################
 install_waijiao_manual() {
-  ssh -p $1 $2@$3 -t "sudo su -c 'rsync -avz --progress --delete /home/$2/$5 /space1/;chown -R www-data:www-data /space1/$5;/etc/init.d/nginx reload'"
+  ssh -p $1 $2@$3 -t "sudo su -c 'rsync -avz --progress --delete /home/$2/$5 /space1/;/bin/cp /space1/$5/webroot/online_index.php /space1/$5/webroot/index.php;chown -R www-data:www-data /space1/$5;/etc/init.d/nginx reload'"
 }
 
 #########################################
@@ -97,7 +97,7 @@ install_waijiao_manual() {
 # usage:
 #   compress zujuan_teacher_git_root_path
 #########################################
-compress() {
+compress_cssjs() {
   if [ $# -gt 0 ] && [ -d $1 ];then
     for file in `find $1 -name "*.js"`
       do
