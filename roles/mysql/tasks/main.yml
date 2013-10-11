@@ -1,11 +1,19 @@
 ---
-  - name: Install mysql
+  - name: Install mysql (apt)
     apt: pkg={{item}}
     with_items:
       - mysql-server
       - mysql-client
       - python-mysqldb
     tags: mysql
+    when: "ansible_pkg_mgr == 'apt'"
+
+  - name: Install mysql (yum)
+    yum: pkg={{item}}
+    with_items:
+      - mysql-server
+    tags: mysql
+    when: "ansible_pkg_mgr == 'yum'"
       
   - name: update mysql configuration
     copy: src=my.cnf dest=/etc/mysql/my.cnf

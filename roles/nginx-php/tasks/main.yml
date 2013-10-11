@@ -3,10 +3,16 @@
   #  service: name=apache2 enabled=no state=stopped
   #  tags: nginx
 
-  - name: Install nginx
+  - name: Install nginx (apt)
     apt: pkg=nginx
     tags: nginx
-
+    when: "ansible_pkg_mgr == 'apt'"
+    
+  - name: Install nginx (yum)
+    yum: pkg=nginx
+    tags: nginx
+    when: "ansible_pkg_mgr == 'yum'"
+    
   - name: update nginx configuration
     copy: src=nginx.conf dest=/etc/nginx/nginx.conf
     tags: nginx
@@ -23,18 +29,32 @@
     copy: src=check-nginx dest=/etc/monit/conf.d/
     tags: nginx
       
-  - name: Install php-fpm
+  - name: Install php-fpm (apt)
     apt: pkg={{item}}
     with_items:
       - php5-fpm
       - php5-dev
       - php5-cli
       - php-pear
-      - php5-mysql
+      - php5-mysqlnd
       - php5-curl
       - php5-gd
       - php5-imagick
     tags: php
+    when: "ansible_pkg_mgr == 'apt'"
+
+  - name: Install php-fpm (yum)
+    yum: pkg={{item}}
+    with_items:
+      - php-fpm
+      - php-devel
+      - php-cli
+      - php-pear
+      - php-mysqlnd
+      - php-gd
+      - php-magickwand
+    tags: php
+    when: "ansible_pkg_mgr == 'yum'"
 
   - name: copy php-fpm configurations
     copy: src=php5-fpm-pool.d-www.conf dest=/etc/php5/fpm/pool.d/www.conf

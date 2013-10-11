@@ -1,7 +1,13 @@
 ---
-  - name: Install zsh
+  - name: Install zsh (apt)
     apt: pkg=zsh
     tags: zsh
+    when: "ansible_pkg_mgr == 'apt'"
+
+  - name: Install zsh (yum)
+    yum: pkg=zsh
+    tags: zsh
+    when: "ansible_pkg_mgr == 'yum'"
 
   - name: Install oh-my-zsh
     sudo: False

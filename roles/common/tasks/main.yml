@@ -43,7 +43,7 @@
     command: /etc/network/if-pre-up.d/firewall
     tags: firewall
     
-  - name: Install common tools (git vim ntp curl tmux ack most ncdu unzip monit fail2ban)
+  - name: Install apt common tools (git vim ntp curl tmux ack most ncdu unzip monit fail2ban)
     apt: pkg={{item}}
     with_items:
        - git
@@ -57,16 +57,39 @@
        - unzip
        - fail2ban
     tags: common
+    when: "ansible_pkg_mgr == 'apt'"
 
+  - name: Install yum common tools (git vim ntp curl tmux ack most ncdu unzip monit fail2ban)
+    yum: pkg={{item}}
+    with_items:
+       - git
+       - vim
+       - ntp
+       - curl
+       - tmux
+       - ack-grep
+       - most
+       - ncdu
+       - unzip
+       - fail2ban
+    tags: common
+    when: "ansible_pkg_mgr == 'yum'"
+    
   - name: copy tumx config
     sudo: False
     copy: src=.tmux.conf dest=~/.tmux.conf
     tags: common
     
-  - name: install monit
+  - name: install monit (apt)
     apt: pkg=monit
     tags: monit
+    when: "ansible_pkg_mgr == 'apt'"
 
+  - name: install monit (yum)
+    yum: pkg=monit
+    tags: monit
+    when: "ansible_pkg_mgr == 'yum'"
+    
   - name: copy monit configuration
     copy: src=monitrc dest=/etc/monit/monitrc
     tags: monit

@@ -1,11 +1,19 @@
 ---
-  - name: Install base python packages
+  - name: Install base python packages (apt)
     apt: pkg={{item}}
     with_items:
       - python-pip
       - python-mysqldb
     tags: python
+    when: "ansible_pkg_mgr == 'apt'"
 
+  - name: Install base python packages (yum)
+    yum: pkg={{item}}
+    with_items:
+      - python-pip
+    tags: python
+    when: "ansible_pkg_mgr == 'yum'"
+    
   - name: pip install packages
     pip: name={{item}}
     with_items:

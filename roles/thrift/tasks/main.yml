@@ -1,7 +1,13 @@
 ---
-  - name: install python pip
+  - name: install python pip (apt)
     apt: package=python-pip
     tags: thrift
+    when: "ansible_pkg_mgr == 'apt'"
+
+  - name: install python pip (yum)
+    yum: package=python-pip
+    tags: thrift
+    when: "ansible_pkg_mgr == 'yum'"    
     
   - name: copy thrift deb
     copy: src={{thriftdeb}} dest=/tmp/{{thriftdeb}}
