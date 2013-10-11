@@ -23,6 +23,15 @@
 [sms]
 10.160.29.246
 
+[mg]
+14.18.206.3
+192.241.207.26
+106.186.116.170
+
+[notinchina]
+192.241.207.26
+106.186.116.170
+
 [aliyun:children]
 tizi-webserver
 waijiao-webserver
