@@ -19,6 +19,25 @@
 [jumpbox]
 #112.124.59.187
 
+[aliyun:children]
+tizi-webserver
+waijiao-webserver
+app-webserver
+jumpbox
+tizi-redis
+sms
+
+[aliyun-intra:children]
+sms
+tizi-redis
+
+[tizi:children]
+tizi-webserver
+
+[webserver:children]
+tizi-webserver
+waijiao-webserver
+
 [waijiao-idc]
 220.181.167.131:9191
 
@@ -51,35 +70,20 @@ waijiao-idc
 192.241.207.26
 106.186.116.170
 
-[aliyun:children]
-tizi-webserver
-waijiao-webserver
-app-webserver
-jumpbox
-tizi-redis
-sms
-
 [intra-server]
 192.168.11.75
 192.168.11.12
 192.168.11.18
 192.168.11.55
 
+[intra:children]
+intra-server
+
 [vagrant-testserver]
 192.168.91.8
 
-[tizi:children]
-tizi-webserver
-
-[webserver:children]
-tizi-webserver
-waijiao-webserver
-
 [vagrant:children]
 vagrant-testserver
-
-[intra:children]
-intra-server
 
 [test]
 #
