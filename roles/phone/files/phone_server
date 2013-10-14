@@ -9,7 +9,7 @@
 PHONE_PATH=/space1/phone
 DESC="phone server daemon"
 NAME=phone_server.py
-DAEMON=$PYTHON_PATH/phone_server.py
+DAEMON=$PHONE_PATH/phone_server.py
 PIDFILE=/var/run/phone_server.pid
 
 SCRIPTNAME=/etc/init.d/phone_server
