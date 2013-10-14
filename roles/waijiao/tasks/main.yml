@@ -26,6 +26,7 @@
       - /space1/waijiao/webroot/admin/courseware
       - /space1/waijiao/webroot/admin/uploads
       - /space1/waijiao/webroot/admin/teacher_avatar
+      - /space1/waijiao/application/logs
     tags: waijiao
         
   - name: copy waijiao nginx configurations
