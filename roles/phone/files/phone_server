@@ -1,0 +1,61 @@
+#!/bin/bash
+#
+# Startup script for the phone server.
+#
+# chkconfig: 345 85 15
+# description: phone server
+# processname: phone_server.py
+ 
+PHONE_PATH=/space1/phone
+DESC="phone server daemon"
+NAME=phone_server.py
+DAEMON=$PYTHON_PATH/phone_server.py
+PIDFILE=/var/run/phone_server.pid
+
+SCRIPTNAME=/etc/init.d/phone_server
+ 
+# Gracefully exit if the package has been removed.
+test -x $DAEMON || exit 0
+ 
+phone_start() {
+  $DAEMON --daemon --backend=mysql --bind=0.0.0.0 --mysqlhost=127.0.0.1 || echo -n " already running"
+}
+ 
+phone_stop() {
+  kill -QUIT `cat $PIDFILE` || echo -n " not running"
+}
+ 
+phone_reload() {
+  kill -HUP `cat $PIDFILE` || echo -n " can't reload"
+}
+ 
+case "$1" in
+  start)
+        echo -n "Starting $DESC: $NAME"
+        phone_start
+        echo "."
+        ;;
+  stop)
+        echo -n "Stopping $DESC: $NAME"
+        phone_stop
+        echo "."
+        ;;
+  reload)
+        echo -n "Reloading $DESC configuration..."
+        phone_reload
+        echo "reload not supported."
+  ;;
+  restart)
+        echo -n "Restarting $DESC: $NAME"
+        phone_stop
+        sleep 1
+        phone_start
+        echo "."
+        ;;
+  *)
+         echo "Usage: $SCRIPTNAME {start|stop|restart|reload}" >&2
+         exit 3
+        ;;
+esac
+exit 0
+

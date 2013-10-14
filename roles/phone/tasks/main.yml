@@ -1,0 +1,36 @@
+---
+  - name: install scons (apt)
+    apt: pkg=scons
+    tags: phone
+    when: "ansible_pkg_mgr == 'apt'"
+
+  - name: install scons (yum)
+    yum: pkg=scons
+    tags: phone
+    when: "ansible_pkg_mgr == 'yum'"
+    
+  - name: copy init.d files
+    copy: src=phone_server dest=/etc/init.d/phone_server
+    tags: phone
+
+  - name: copy files
+    copy: src=phone.tar.gz dest=~/phone.tar.gz
+    tags: phone
+
+  - name: extract files
+    command: tar zxf phone.tar.gz chdir=~
+    tags: phone
+
+  - name: copy to dest
+    command: rsync -avz --progress --delete --exclude="*.pyc" ./phone /space1/ chdir=~
+    tags: phone
+
+  - name: scons to build
+    command: scons chdir=/space1/phone
+    tags: phone
+
+  - name: restart server
+    service: name=phone_server state=restarted
+    tags: phone
+    #TODO - reload without service down
+
