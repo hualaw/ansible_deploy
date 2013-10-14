@@ -1,5 +1,5 @@
 ---
-- hosts: intra
+- hosts: all
 
   user: $user
   sudo: true
@@ -9,11 +9,11 @@
     #- waijiao
     #- thrift
     #- ppp
-    - common
+    #- common
     #- redis
     #- ssh
     #- mysql
-    #- nginx-php
+    - nginx-php
     #- oh-my-zsh
     #- java
     #- buildredis
