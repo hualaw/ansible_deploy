@@ -19,8 +19,13 @@
     user: name=deploy groups=sudo,www-data group=deploy
     tags: waijiao
 
-  - name: ensure /space1/waijiao path
-    file: state=directory path=/space1/waijiao owner=www-data group=deploy mode=0770
+  - name: ensure /space1/waijiao path owner
+    file: state=directory path={{item}} owner=www-data group=deploy mode=0770
+    with_items:
+      - /space1/waijiao
+      - /space1/waijiao/webroot/admin/courseware
+      - /space1/waijiao/webroot/admin/uploads
+      - /space1/waijiao/webroot/admin/teacher_avatar
     tags: waijiao
         
   - name: copy waijiao nginx configurations
