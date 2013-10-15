@@ -2,8 +2,8 @@
 #
 ### BEGIN INIT INFO
 # Provides:          phone_server
-# Required-Start:    $local_fs $remote_fs $network $syslog
-# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Required-Start:    $local_fs $remote_fs $network $syslog $mysql $redis-server
+# Required-Stop:     $local_fs $remote_fs $network $syslog $mysql $redis-server
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: service and resource phone_server

@@ -7,7 +7,6 @@ server {
     server_name *.91waijiao.com 121.124.41.101 *.91peilian.com;
 
     allow all;
-    deny all;
 
     root /space/waijiao/webroot;
 
@@ -52,4 +51,25 @@ server {
         log_not_found off;
     }
 }
-# vim: set filetype=nginx tabstop=4 shiftwidth=4:
+
+server{
+    listen 80;
+    server_name img.91waijiao.com;
+    
+    allow all;
+    
+    root /space/waijiao/static;
+    
+    location = /robots.txt {
+        allow all;
+        log_not_found off;
+        access_log off;
+    }
+    
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+        expires max;
+        log_not_found off;
+    }
+}
+
+# vim: set filet:ype=nginx tabstop=4 shiftwidth=4:
