@@ -8,7 +8,7 @@ server {
 
     allow all;
 
-    root /space/waijiao/webroot;
+    root /space1/waijiao/webroot;
 
     index index.html index.htm index.php;
 
@@ -32,14 +32,14 @@ server {
     #   set $domain $1;
     #}
 
-        if (!-e $request_filename) {
+    if (!-e $request_filename) {
         rewrite ^/(.*)$ /index.php/$1 last;
             break;
-        }
+    }
 
     location ~ \.php$ {
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         #fastcgi_param   REQUEST_URI "/$domain$request_uri";
         fastcgi_intercept_errors on;
         fastcgi_read_timeout 3000;
@@ -58,7 +58,7 @@ server{
     
     allow all;
     
-    root /space/waijiao/static;
+    root /space1/waijiao/static;
     
     location = /robots.txt {
         allow all;
@@ -69,6 +69,20 @@ server{
     location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
         expires max;
         log_not_found off;
+    }
+}
+
+server{
+    listen 80;
+    server_name data.91waijiao.com;
+    
+    allow all;
+    
+    root /space1/data;
+    
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+        expires max;
+        #log_not_found off;
     }
 }
 

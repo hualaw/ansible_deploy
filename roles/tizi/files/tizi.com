@@ -1,5 +1,5 @@
 upstream tizi {
-    server 127.0.0.1:9000 max_fails=5 fail_timeout=10s;
+    server unix:/dev/shm/php.socket max_fails=5 fail_timeout=10s;
 }   
 
 server {
@@ -7,7 +7,6 @@ server {
     server_name *.tizi.com 121.199.20.59;
 
     allow all;
-    deny all;
 
     root /space1/tizi;
 
@@ -33,14 +32,14 @@ server {
     #   set $domain $1;
     #}
 
-        if (!-e $request_filename) {
+    if (!-e $request_filename) {
         rewrite ^/(.*)$ /index.php/$1 last;
             break;
-        }
+    }
 
     location ~ \.php$ {
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         #fastcgi_param   REQUEST_URI "/$domain$request_uri";
         fastcgi_intercept_errors on;
         fastcgi_read_timeout 3000;
