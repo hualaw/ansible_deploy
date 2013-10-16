@@ -4,7 +4,7 @@ upstream waijiao {
 
 server {
     listen 80;
-    server_name *.91waijiao.com 121.124.41.101 *.91peilian.com;
+    server_name www.91waijiao.com www2.91waijiao.com teacher.91waijiao.com api.91waijiao.com agent.91waijiao.com admin.91waijiao.com 121.124.41.101 *.91peilian.com;
 
     allow all;
 
@@ -32,10 +32,14 @@ server {
     #   set $domain $1;
     #}
 
-    if (!-e $request_filename) {
-        rewrite ^/(.*)$ /index.php/$1 last;
-            break;
-    }
+	location ~ ^/information/(.*)$ {
+		proxy_pass http://cms.91waijiao.com;
+	}
+
+    #if (!-e $request_filename) {
+    #    rewrite ^/(.*)$ /index.php/$1 last;
+    #    break;
+    #}
 
     location ~ \.php$ {
         include fastcgi_params;
@@ -49,40 +53,6 @@ server {
     location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
         expires max;
         log_not_found off;
-    }
-}
-
-server{
-    listen 80;
-    server_name img.91waijiao.com;
-    
-    allow all;
-    
-    root /space1/waijiao/static;
-    
-    location = /robots.txt {
-        allow all;
-        log_not_found off;
-        access_log off;
-    }
-    
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
-        expires max;
-        log_not_found off;
-    }
-}
-
-server{
-    listen 80;
-    server_name data.91waijiao.com;
-    
-    allow all;
-    
-    root /space1/data;
-    
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
-        expires max;
-        #log_not_found off;
     }
 }
 
