@@ -1,5 +1,6 @@
 upstream tizi {
-    server 127.0.0.1:9000 max_fails=5 fail_timeout=10s;
+    #server 127.0.0.1:9000 max_fails=5 fail_timeout=10s;
+	server unix:/dev/shm/php.socket max_fails=5 fail_timeout=10s;
 }   
 
 server {
