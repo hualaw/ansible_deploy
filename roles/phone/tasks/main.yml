@@ -1,0 +1,8 @@
+---
+  #- name: copy files
+  #  copy: src=phone_server.tar.gz dest=~/phone_server.tar.gz
+  #  tags: phone_server
+
+  - name: copy phone_server nginx configurations
+    copy: src=phone_server dest=/etc/init.d/phone_server mode=0755
+    tags: phone_server
