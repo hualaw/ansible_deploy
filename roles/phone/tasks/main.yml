@@ -10,7 +10,7 @@
     when: "ansible_pkg_mgr == 'yum'"
     
   - name: copy init.d files
-    copy: src=phone_server dest=/etc/init.d/phone_server
+    copy: src=phone_server dest=/etc/init.d/phone_server mode=0755
     tags: phone
 
   - name: copy files
