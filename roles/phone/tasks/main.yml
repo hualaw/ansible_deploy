@@ -34,3 +34,11 @@
     tags: phone
     #TODO - reload without service down
 
+  - name: copy monit configuration
+    copy: src=check-phone dest=/etc/monit/conf.d/
+    tags: phone
+
+  - name: reload monit resource
+    service: name=monit state=reloaded
+    tags: phone
+

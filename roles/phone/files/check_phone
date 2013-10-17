@@ -1,0 +1,5 @@
+check program check_phone
+    with path "/space1/phone/check_phone_server.py"
+    #with timeout 1 seconds
+    if status != 0 then exec "/etc/init.d/phone_server restart"
+
