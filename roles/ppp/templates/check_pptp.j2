@@ -1,0 +1,5 @@
+check program check_pptp
+    with path "/usr/local/bin/check_pptp.sh"
+    #with timeout 1 seconds
+    if status != 0 then exec "/usr/local/bin/redial_pptp"
+

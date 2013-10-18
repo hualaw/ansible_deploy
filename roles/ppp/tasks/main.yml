@@ -3,6 +3,35 @@
     apt: pkg=pptp-linux # binutils
     tags: pptp
 
-  - name: setup ppp info
-    command: pptpsetup --create {{name}} --server {{server}} --username {{username}} --password '{{password}}' --start --encrypt
+  #- name: setup ppp info
+  #  command: pptpsetup --create {{name}} --server {{server}} --username {{username}} --password '{{password}}' --start --encrypt
+  #  tags: pptp
+
+  - name: copy pptp peers config
+    template: src=jumpbox.j2 dest=/etc/ppp/peers/jumpbox mode=0644
     tags: pptp
+    
+  - name: copy pptp peers config
+    template: src=chap-secrets.j2 dest=/etc/ppp/chap-secrets mode=0600
+    tags: pptp
+
+  - name: check pptp scripts
+    template: src=check_pptp.sh.j2 dest=/usr/local/bin/check_pptp.sh mode=0755
+    tags: pptp
+
+  - name: redial pptp scripts
+    template: src=redial_pptp.j2 dest=/usr/local/bin/redial_pptp mode=0755
+    tags: pptp
+
+  - name: special poff
+    copy: src=poffex dest=/usr/local/bin/poffex
+    tags: pptp
+
+  - name: copy pptp monit config
+    template: src=check_pptp.j2 dest=/etc/monit/conf.d/check_pptp
+    tags: pptp
+
+  - name: reload monit resource
+    service: name=monit state=reloaded
+    tags: pptp
+

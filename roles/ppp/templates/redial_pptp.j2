@@ -1,0 +1,6 @@
+#!/bin/sh
+/usr/local/bin/poffex -a
+/usr/bin/pon {{name}}
+/sbin/route del default dev eth0
+sleep 5
+/sbin/route add default dev ppp0

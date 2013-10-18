@@ -1,0 +1,10 @@
+pty "pptp {{server}} --nolaunchpppd"
+lock
+noauth
+nobsdcomp
+nodeflate
+name {{username}}
+remotename {{name}}
+ipparam {{name}}
+require-mppe-128
+
