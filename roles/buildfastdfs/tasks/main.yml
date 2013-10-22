@@ -1,0 +1,46 @@
+---
+  - name: ensure directory /tmp/fastdfs is present
+    file: state=directory path=/tmp/fastdfs
+    tags: buildfdfs
+
+  - name: get fastdfs source
+    get_url: url={{url}} dest=/tmp/fastdfs
+    tags: buildfdfs
+    
+  - name: extract fastdfs
+    command: tar -xf FastDFS_v{{version}}.tar.gz chdir=/tmp/fastdfs creates={{path}}
+    tags: buildfdfs
+
+  - name: hotpatch fastdfs
+    shell: sed -i '92s/if/if \[ -f \/usr\/lib\/x86_64-linux-gnu\/libpthread.a \] ||/' make.sh chdir={{path}}
+    tags: buildfdfs
+    
+  - name: build fastdfs
+    command: sh ./make.sh chdir={{path}}
+    tags: buildfdfs
+
+  - name: build deb packages for fastdfs {{version}}
+    command: checkinstall -D -y --pkgname=fastdfs --pkgversion={{version}} --maintainer=songchuanhsheng@91waijiao.com sh ./make.sh install chdir={{path}}
+    tags: buildfdfs
+
+  - name: build fastdfs php
+    shell: /usr/bin/phpize; ./configure; make chdir={{path}}/php_client
+    tags: buildfdfs
+
+  - name: build deb packages for fastdfs python {{pyversion}}
+    command: checkinstall -D -y --pkgname=phpfastdfs --pkgversion={{version}} --maintainer=songchuanhsheng@91waijiao.com make install chdir={{path}}/php_client
+    tags: buildfdfs
+    
+  - name: get fastdfs python source
+    get_url: url={{pyurl}} dest=/tmp/fastdfs
+    tags: buildfdfs
+    
+  - name: extract fastdfs python
+    command: tar -xf fdfs_client-py-{{pyversion}}.tar.gz chdir=/tmp/fastdfs creates={{pypath}}
+    tags: buildfdfs
+    
+  - name: build deb packages for fastdfs python {{pyversion}}
+    command: checkinstall -D -y --pkgname=pyfastdfs --pkgversion={{pyversion}} --maintainer=songchuanhsheng@91waijiao.com python setup.py install chdir={{pypath}}
+    tags: buildfdfs
+
+

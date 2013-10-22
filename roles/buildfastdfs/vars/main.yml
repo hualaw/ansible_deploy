@@ -1,0 +1,6 @@
+url: http://fastdfs.googlecode.com/files/FastDFS_v4.06.tar.gz
+version: 4.06
+path: /tmp/fastdfs/FastDFS
+pyurl: http://fastdfs.googlecode.com/files/fdfs_client-py-1.2.6.tar.gz
+pyversion: 1.2.6
+pypath: /tmp/fastdfs/fdfs_client-py-1.2.6

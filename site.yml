@@ -15,6 +15,7 @@
     - thrift
     - buildredis
     - buildthrift
+    - buildfastdfs
     - python
     - user
     - tizi
