@@ -1,0 +1,33 @@
+---
+  - name: copy fastdfs deb
+    copy: src={{fastdfsdeb}} dest=/tmp/{{fastdfsdeb}}
+    tags: fastdfs
+
+  - name: install fastdfs deb
+    command: /usr/bin/dpkg -i /tmp/{{fastdfsdeb}}
+    tags: fastdfs
+
+  - name: copy fastdfs nginx deb
+    copy: src={{nginxfdfsdeb}} dest=/tmp/{{nginxfdfsdeb}}
+    tags: fastdfs
+
+  - name: install fastdfs nginx deb
+    command: /usr/bin/dpkg -i /tmp/{{nginxfdfsdeb}}
+    tags: fastdfs
+
+  - name: copy fastdfs php deb
+    copy: src={{phpfdfsdeb}} dest=/tmp/{{phpfdfsdeb}}
+    tags: fastdfs
+
+  - name: install fastdfs php deb
+    command: /usr/bin/dpkg -i /tmp/{{phpfdfsdeb}}
+    tags: fastdfs
+
+  - name: copy fastdfs python deb
+    copy: src={{pyfdfsdeb}} dest=/tmp/{{pyfdfsdeb}}
+    tags: fastdfs
+
+  - name: install fastdfs python deb
+    command: /usr/bin/dpkg -i /tmp/{{pyfdfsdeb}}
+    tags: fastdfs
+

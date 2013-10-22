@@ -13,6 +13,7 @@
     - java
     - redis
     - thrift
+    - fastdfs
     - buildredis
     - buildthrift
     - buildfastdfs

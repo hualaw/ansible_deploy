@@ -11,7 +11,7 @@
     command: tar -xf FastDFS_v{{version}}.tar.gz chdir=/tmp/fastdfs creates={{path}}
     tags: buildfdfs
 
-  - name: hotpatch fastdfs
+  - name: hotpatch fastdfs for 4.06
     shell: sed -i '92s/if/if \[ -f \/usr\/lib\/x86_64-linux-gnu\/libpthread.a \] ||/' make.sh chdir={{path}}
     tags: buildfdfs
     
@@ -43,4 +43,27 @@
     command: checkinstall -D -y --pkgname=pyfastdfs --pkgversion={{pyversion}} --maintainer=songchuanhsheng@91waijiao.com python setup.py install chdir={{pypath}}
     tags: buildfdfs
 
+  - name: download nginx fastdfs module
+    get_url: url={{fdfsnginxurl}} dest=/tmp/fastdfs
+    tags: buildfdfs
+    
+  - name: extract nginx fastdfs module
+    command: tar -xf fastdfs-nginx-module_v{{fdfsnginxversion}}.tar.gz chdir=/tmp/fastdfs creates={{fdfsnginxpath}}
+    tags: buildfdfs
+    
+  - name: download tengine
+    get_url: url={{tengineurl}} dest=/tmp/fastdfs
+    tags: buildfdfs
+
+  - name: extract tengine
+    command: tar -xf tengine-{{tengineversion}}.tar.gz chdir=/tmp/fastdfs creates={{tenginepath}}
+    tags: buildfdfs
+    
+  - name: build tengine
+    shell: ./configure --with-http_realip_module --add-module=../fastdfs-nginx-module/src --prefix=/usr --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf  --error-log-path=/var/log/nginx/error.log --pid-path=/var/run/nginx.pid --user=www-data --group=www-data --http-log-path=/var/log/nginx/access.log;make chdir={{tenginepath}}
+    tags: buildfdfs
+
+  - name: build deb packages for fastdfs nginx
+    command: checkinstall -D -y --pkgname=nginxfdfs --pkgversion={{tengineversion}} --maintainer=songchuanhsheng@91waijiao.com make install chdir={{tenginepath}}
+    tags: buildfdfs
 

@@ -1,0 +1,5 @@
+fastdfsdeb: fastdfs_4.06-1_amd64.deb
+nginxfdfsdeb: nginxfdfs_1.5.1-1_amd64.deb
+phpfdfsdeb: phpfastdfs_4.06-1_amd64.deb
+pyfdfsdeb: pyfastdfs_1.2.6-1_amd64.deb
+

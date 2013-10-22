@@ -4,3 +4,9 @@ path: /tmp/fastdfs/FastDFS
 pyurl: http://fastdfs.googlecode.com/files/fdfs_client-py-1.2.6.tar.gz
 pyversion: 1.2.6
 pypath: /tmp/fastdfs/fdfs_client-py-1.2.6
+tengineurl: http://tengine.taobao.org/download/tengine-1.5.1.tar.gz
+tengineversion: 1.5.1
+tenginepath: /tmp/fastdfs/tengine-1.5.1
+fdfsnginxurl: http://fastdfs.googlecode.com/files/fastdfs-nginx-module_v1.15.tar.gz
+fdfsnginxversion: 1.15
+fdfsnginxpath: /tmp/fastdfs/fastdfs-nginx-module_v1.15
