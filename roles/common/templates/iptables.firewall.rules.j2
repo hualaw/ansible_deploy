@@ -44,6 +44,12 @@
 -A INPUT -p tcp --dport 1899 -j ACCEPT
 {% endif %}
 
+{% if 'crm' in group_names %}
+-A INPUT -p tcp -s 124.193.177.194 -m multiport --dport 9911,8811,8000 -j ACCEPT
+-A INPUT -p tcp -s 223.72.244.154 -m multiport --dport 9911,8811,8000 -j ACCEPT
+-A INPUT -p tcp -s 124.193.172.66 -m multiport --dport 9911,8811,8000 -j ACCEPT
+{% endif %}
+
 {% if 'jumpbox' in group_names %}
 # enable pptpd options
 -A INPUT -i ppp+ -j ACCEPT

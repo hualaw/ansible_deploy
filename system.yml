@@ -1,5 +1,5 @@
 ---
-- hosts: news
+- hosts: all
 
   user: $user
   sudo: true
@@ -7,8 +7,8 @@
   roles:
     - common
     - ssh
-#    - oh-my-zsh
     - python
+    - oh-my-zsh
     #- java
     #- buildredis
     #- buildthrift
