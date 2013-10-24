@@ -31,3 +31,65 @@
     command: /usr/bin/dpkg -i /tmp/{{pyfdfsdeb}}
     tags: fastdfs
 
+  - name: copy startup files
+    copy: src={{item}} dest=/etc/init.d
+    with_items:
+      - fdfs_storaged
+      - fdfs_trackerd
+      - nginx
+    tags: fastdfs
+
+  - name: copy nginx config
+    copy: src={{item}} dest=/etc/nginx
+    with_items:
+      - nginx.conf
+      - mime.types
+    tags: fastdfs
+
+  - name: copy fastdfs config
+    copy: src={{item}} dest=/etc/fdfs
+    with_items:
+      - tracker.conf
+      - storage.conf
+      - mod_fastdfs.conf
+    tags: fastdfs
+
+  - name: ensure directory sistes is present
+    file: state=directory path={{item}}
+    with_items:
+      - /etc/nginx/sites-available
+      - /etc/nginx/sites-enabled
+      - /var/log/nginx
+    tags: fastdfs
+
+  - name: copy fastdfs nginx config
+    copy: src={{item}} dest=/etc/nginx/sites-available
+    with_items:
+      - storage-nginx.conf
+      - tracker-nginx.conf
+    tags: fastdfs
+
+  - name: link to site-enabled
+    file: src=/etc/nginx/sites-available/storage-nginx.conf dest=/etc/nginx/sites-enabled/storage-nginx.conf state=link
+    tags: fastdfs
+    
+  - name: link to site-enabled
+    file: src=/etc/nginx/sites-available/tracker-nginx.conf dest=/etc/nginx/sites-enabled/tracker-nginx.conf state=link
+    tags: fastdfs
+
+  - name: reload nginx service
+    service: name={{item}} state=started
+    with_items:
+      - nginx
+      - fdfs_storaged
+      - fdfs_trackerd
+    tags: fastdfs
+
+  - name: copy monit configuration
+    copy: src=check-nginx dest=/etc/monit/conf.d/
+    tags: fastdfs
+    
+  - name: reload monit resource
+    service: name=monit state=reloaded
+    tags: fastdfs
+    
