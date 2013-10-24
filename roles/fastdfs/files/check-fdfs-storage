@@ -1,0 +1,4 @@
+check host localstorage with address 127.0.0.1
+  start program = "/etc/init.d/fdfs_storaged start"
+  stop program = "/etc/init.d/fdfs_storaged stop"
+  if failed host 127.0.0.1 port 23000 then start

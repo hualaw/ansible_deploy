@@ -52,6 +52,8 @@
       - tracker.conf
       - storage.conf
       - mod_fastdfs.conf
+      - client.conf
+      - http.conf
     tags: fastdfs
 
   - name: ensure directory sistes is present
@@ -86,7 +88,11 @@
     tags: fastdfs
 
   - name: copy monit configuration
-    copy: src=check-nginx dest=/etc/monit/conf.d/
+    copy: src={{item}} dest=/etc/monit/conf.d/
+    with_items:
+      - check-nginx
+      - check-fdfs-storage
+      - check-fdfs-tracker
     tags: fastdfs
     
   - name: reload monit resource

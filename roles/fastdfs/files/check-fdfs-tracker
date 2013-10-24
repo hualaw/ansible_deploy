@@ -1,0 +1,4 @@
+check host localtracker with address 127.0.0.1
+  start program = "/etc/init.d/fdfs_trackerd start"
+  stop program = "/etc/init.d/fdfs_trackerd stop"
+  if failed host 127.0.0.1 port 22122 then start
