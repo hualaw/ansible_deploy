@@ -4,7 +4,7 @@
 disabled=false
 
 # the name of the group this storage server belongs to
-group_name=group1
+group_name=g1
 
 # bind an address of this host
 # empty for bind all addresses of this host
@@ -108,8 +108,8 @@ subdir_count_per_path=256
 
 # tracker_server can ocur more than once, and tracker_server format is
 #  "host:port", host can be hostname or ip address
-tracker_server=192.168.11.55:22122
-#tracker_server=192.168.11.55:22122
+tracker_server={{tracker1}}:22122
+tracker_server={{tracker2}}:22122
 
 #standard log level as syslog, case insensitive, value list:
 ### emerg for emergency

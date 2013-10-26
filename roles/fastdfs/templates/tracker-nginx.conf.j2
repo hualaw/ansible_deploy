@@ -1,11 +1,10 @@
 upstream group1.tizi.com {
-    server  127.0.0.1:8081;
-    #server  192.168.32.41:80;
+    server  {{storage1x1}}:8081;
+    server  {{storage1x2}}:8081;
 }
 
 server {
     listen 80;
-    server_name 127.0.0.1 default;
 
     proxy_redirect off;
     proxy_set_header Host $host;

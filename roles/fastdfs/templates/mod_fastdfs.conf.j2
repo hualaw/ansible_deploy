@@ -11,14 +11,15 @@ base_path=/space1/fastdfs
 
 # FastDFS tracker_server can ocur more than once, and tracker_server format is
 #  "host:port", host can be hostname or ip address
-tracker_server=192.168.11.55:22122
+tracker_server={{tracker1}}:22122
+tracker_server={{tracker2}}:22122
 
 # the port of storage server
 # the default value is 23000
 storage_server_port=23000
 
 # the group name of storage server
-group_name=group1
+group_name=g1
 
 # if uri including group name
 # default value is false

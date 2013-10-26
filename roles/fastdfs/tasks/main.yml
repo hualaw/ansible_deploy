@@ -50,12 +50,21 @@
     copy: src={{item}} dest=/etc/fdfs
     with_items:
       - tracker.conf
-      - storage.conf
-      - mod_fastdfs.conf
-      - client.conf
       - http.conf
     tags: fastdfs
 
+  - name: copy fastdfs config
+    template: src=client.conf.j2 dest=/etc/fdfs/client.conf
+    tags: fastdfs
+    
+  - name: copy fastdfs config
+    template: src=storage.conf.j2 dest=/etc/fdfs/storage.conf
+    tags: fastdfs
+    
+  - name: copy fastdfs config
+    template: src=mod_fastdfs.conf.j2 dest=/etc/fdfs/mod_fastdfs.conf
+    tags: fastdfs
+    
   - name: ensure directory sistes is present
     file: state=directory path={{item}}
     with_items:
@@ -65,12 +74,13 @@
     tags: fastdfs
 
   - name: copy fastdfs nginx config
-    copy: src={{item}} dest=/etc/nginx/sites-available
-    with_items:
-      - storage-nginx.conf
-      - tracker-nginx.conf
+    template: src=tracker-nginx.conf.j2 dest=/etc/nginx/sites-available/tracker-nginx.conf
     tags: fastdfs
 
+  - name: copy fastdfs nginx config
+    copy: src=storage-nginx.conf dest=/etc/nginx/sites-available/
+    tags: fastdfs
+    
   - name: link to site-enabled
     file: src=/etc/nginx/sites-available/storage-nginx.conf dest=/etc/nginx/sites-enabled/storage-nginx.conf state=link
     tags: fastdfs

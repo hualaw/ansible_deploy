@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   #config.vm.provision :shell, :path => "bootstrap.sh"
   config.vm.provision "ansible" do |ansible|
-    ansible.inventory_file = "./ansible_inventory"
+    ansible.inventory_path = "./ansible_inventory"
     ansible.playbook = "site.yml"
     ansible.verbose = true
   end

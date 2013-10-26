@@ -17,7 +17,7 @@
 10.160.29.246
 
 [jumpbox]
-#112.124.59.187
+112.124.59.187
 
 [aliyun:children]
 tizi-webserver
@@ -69,6 +69,9 @@ waijiao-idc
 [notinchina]
 192.241.207.26
 106.186.116.170
+
+[fastdfs]
+192.168.11.55:9191
 
 [intra-server]
 192.168.11.75
