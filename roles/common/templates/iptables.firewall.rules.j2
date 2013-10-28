@@ -51,10 +51,10 @@
 {% endif %}
 
 {% if 'fastdfs' in group_names %}
--A INPUT -p tcp -s 124.193.177.194 --dport 22122 -j ACCEPT
--A INPUT -p tcp -s 223.72.244.154 --dport 22122 -j ACCEPT
--A INPUT -p tcp -s 124.193.172.66 --dport 22122 -j ACCEPT
--A INPUT -p tcp -s 192.168.11.0/24 --dport 22122 -j ACCEPT
+-A INPUT -p tcp -s 124.193.177.194 -m multiport --dport 22122,23000 -j ACCEPT
+-A INPUT -p tcp -s 223.72.244.154 -m multiport --dport 22122,23000 -j ACCEPT
+-A INPUT -p tcp -s 124.193.172.66 -m multiport --dport 22122,23000 -j ACCEPT
+-A INPUT -p tcp -s 192.168.0.0/16 -m multiport --dport 22122,23000,8081 -j ACCEPT
 {% endif %}
 
 {% if 'jumpbox' in group_names %}

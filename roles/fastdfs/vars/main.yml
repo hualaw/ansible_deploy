@@ -2,8 +2,8 @@ fastdfsdeb: fastdfs_4.06-1_amd64.deb
 nginxfdfsdeb: nginxfdfs_1.5.1-1_amd64.deb
 phpfdfsdeb: phpfastdfs_4.06-1_amd64.deb
 pyfdfsdeb: pyfastdfs_1.2.6-1_amd64.deb
-tracker1: 192.168.11.55
-tracker2: 192.168.11.55
-storage1x1: 192.168.11.55
-storage1x2: 192.168.11.55
+tracker1: 192.168.91.101
+tracker2: 192.168.91.102
+storage1x1: 192.168.91.101
+storage1x2: 192.168.91.102
 

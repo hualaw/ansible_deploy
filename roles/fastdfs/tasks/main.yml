@@ -1,4 +1,13 @@
 ---
+  - name: ensure directory /spacen/fastdfs is present
+    file: state=directory path={{item}} owner=www-data group=www-data
+    with_items:
+      - /space1/fastdfs
+      - /space2/fastdfs
+      - /space3/fastdfs
+      - /space4/fastdfs
+    tags: fastdfs
+    
   - name: copy fastdfs deb
     copy: src={{fastdfsdeb}} dest=/tmp/{{fastdfsdeb}}
     tags: fastdfs
@@ -32,7 +41,7 @@
     tags: fastdfs
 
   - name: copy startup files
-    copy: src={{item}} dest=/etc/init.d
+    copy: src={{item}} dest=/etc/init.d mode=0644
     with_items:
       - fdfs_storaged
       - fdfs_trackerd
@@ -40,29 +49,29 @@
     tags: fastdfs
 
   - name: copy nginx config
-    copy: src={{item}} dest=/etc/nginx
+    copy: src={{item}} dest=/etc/nginx mode=0644
     with_items:
       - nginx.conf
       - mime.types
     tags: fastdfs
 
   - name: copy fastdfs config
-    copy: src={{item}} dest=/etc/fdfs
+    copy: src={{item}} dest=/etc/fdfs mode=0644
     with_items:
       - tracker.conf
       - http.conf
     tags: fastdfs
 
   - name: copy fastdfs config
-    template: src=client.conf.j2 dest=/etc/fdfs/client.conf
+    template: src=client.conf.j2 dest=/etc/fdfs/client.conf mode=0644
     tags: fastdfs
     
   - name: copy fastdfs config
-    template: src=storage.conf.j2 dest=/etc/fdfs/storage.conf
+    template: src=storage.conf.j2 dest=/etc/fdfs/storage.conf mode=0644
     tags: fastdfs
     
   - name: copy fastdfs config
-    template: src=mod_fastdfs.conf.j2 dest=/etc/fdfs/mod_fastdfs.conf
+    template: src=mod_fastdfs.conf.j2 dest=/etc/fdfs/mod_fastdfs.conf mode=0644
     tags: fastdfs
     
   - name: ensure directory sistes is present
@@ -74,11 +83,11 @@
     tags: fastdfs
 
   - name: copy fastdfs nginx config
-    template: src=tracker-nginx.conf.j2 dest=/etc/nginx/sites-available/tracker-nginx.conf
+    template: src=tracker-nginx.conf.j2 dest=/etc/nginx/sites-available/tracker-nginx.conf mode=0644
     tags: fastdfs
 
   - name: copy fastdfs nginx config
-    copy: src=storage-nginx.conf dest=/etc/nginx/sites-available/
+    copy: src=storage-nginx.conf dest=/etc/nginx/sites-available/ mode=0644
     tags: fastdfs
     
   - name: link to site-enabled
