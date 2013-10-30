@@ -13,7 +13,7 @@
    
   - name: copy index.php
     command: /bin/cp /space1/waijiao/webroot/online_index.php /space1/waijiao/webroot/index.php
-    tags: tizi 
+    tags: waijiao
 
   - name: ensure deploy user in www-data group
     user: name=deploy groups=sudo,www-data group=deploy
