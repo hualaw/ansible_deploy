@@ -1,7 +1,7 @@
 ---
-#  - name: create new user
-#    user: name={{ newuser }} password={{ passwd }} state=present
-#    tags: newuser
+  - name: create new user
+    user: name={{ newuser }} password={{ passwd }} state=present
+    tags: newuser
 
   - name: set new user authorized_key
     authorized_key: user={{ newuser }} key="{{ item }}"

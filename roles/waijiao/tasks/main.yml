@@ -35,7 +35,7 @@
     tags: waijiao
  
   - name: copy cms nginx configurations
-    copy: src=cms.91waijiao.com.conf dest=/etc/nginx/sites-available/cms.91waijiao.com.conf
+    copy: src=cms.91waijiao.com dest=/etc/nginx/sites-available/cms.91waijiao.com
     tags: waijiao
 
   - name: link to site-enabled
