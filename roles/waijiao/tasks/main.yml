@@ -31,19 +31,28 @@
     tags: waijiao
         
   - name: copy waijiao nginx configurations
-    copy: src=91waijiao.com dest=/etc/nginx/sites-available/91waijiao.com
+    copy: src={{item}} dest=/etc/nginx/sites-available/
+    with_items:
+      - 91waijiao.com
+      - cms.91waijiao.com
+      - data.91waijiao.com
+      - img.91waijiao.com
     tags: waijiao
  
-  - name: copy cms nginx configurations
-    copy: src=cms.91waijiao.com dest=/etc/nginx/sites-available/cms.91waijiao.com
-    tags: waijiao
-
   - name: link to site-enabled
     file: src=/etc/nginx/sites-available/91waijiao.com dest=/etc/nginx/sites-enabled/91waijiao.com state=link
     tags: waijiao
 
   - name: link to site-enabled
     file: src=/etc/nginx/sites-available/cms.91waijiao.com dest=/etc/nginx/sites-enabled/cms.91waijiao.com state=link
+    tags: waijiao
+
+  - name: link to site-enabled
+    file: src=/etc/nginx/sites-available/data.91waijiao.com dest=/etc/nginx/sites-enabled/data.91waijiao.com state=link
+    tags: waijiao
+
+  - name: link to site-enabled
+    file: src=/etc/nginx/sites-available/img.91waijiao.com dest=/etc/nginx/sites-enabled/img.91waijiao.com state=link
     tags: waijiao
 
   - name: reload nginx

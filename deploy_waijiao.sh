@@ -2,6 +2,8 @@
 
 ################# checkout projects
 
+set -e
+
 DIR=`dirname $0`
 PROG=`basename $0`
 
