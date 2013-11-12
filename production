@@ -62,6 +62,9 @@ waijiao-webserver
 220.181.167.135:9191
 220.181.167.133:9191
 
+[waijiaocn]
+114.112.39.157
+
 [zhaowei:children]
 tizi-idc
 mysql-idc
