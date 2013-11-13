@@ -6,8 +6,10 @@
 10.160.50.112
 10.160.29.137
 
+[old-waijiao-webserver]
+42.121.114.19
+
 [waijiao-webserver]
-#42.121.114.19
 112.124.41.101
 
 [app-webserver]
@@ -59,6 +61,9 @@ waijiao-webserver
 [phone]
 220.181.167.135:9191
 220.181.167.133:9191
+
+[waijiaocn]
+114.112.39.157
 
 [zhaowei:children]
 tizi-idc
