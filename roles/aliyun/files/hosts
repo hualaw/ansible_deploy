@@ -1,0 +1,28 @@
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+10.160.34.105 jumpbox
+10.160.29.246 sms
+10.160.13.77 app
+
+10.160.38.118 wj-web1
+10.135.11.171 wj-web2
+10.200.136.199 wj-old
+
+10.200.134.159 wj-mcu # windows server
+
+10.160.50.112 tizi-redis1
+10.160.29.137 tizi-redis2
+10.160.43.72  tizi-web2
+10.132.9.3    tizi-web1
+
+10.160.28.83  tizi-windoc # windows server
+
+#mysql rdsnuyizmnuyizm.mysql.rds.aliyuncs.com
+
