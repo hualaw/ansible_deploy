@@ -1,0 +1,105 @@
+---
+  #- name: set hostname
+  #  command: echo "{{hostname}}" > /etc/hostname && hostname -F /etc/hostname
+
+  #- name: set hosts
+  #  template: src=hosts.j2 dest=/etc/hosts
+
+  - name: set timezone
+    command: echo "Asia/Shanghai" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
+
+  - name: set locale to en_us
+    copy: src=locale dest=/etc/default/locale
+
+  - name: reconfigure locales
+    command: dpkg-reconfigure -f noninteractive locales
+    
+  - name: update sources.list
+    template: src=sources.list.j2 dest=/etc/apt/sources.list backup=yes
+
+  - name: Upgrade apt packages
+    apt: upgrade=yes
+         update_cache=yes
+
+  #- name: upgrade virtualbox guest if needed
+  #  apt: pkg=virtualbox-guest-utils
+
+  - name: Install common tools (git vim ntp curl tmux ack most ncdu unzip monit fail2ban)
+    apt: pkg={{item}}
+    with_items:
+       - git
+       - vim
+       - ntp
+       - curl
+       - tmux
+       - ack-grep
+       - most
+       - ncdu
+       - unzip
+       - monit
+       - fail2ban
+
+  - name: copy tumx config
+    sudo: False
+    copy: src=.tmux.conf dest=~/.tmux.conf
+
+  - name: copy install script 
+    copy: src=zabbix_install.sh dest=/root/zabbix_install.sh
+    tags: zabbix-agent
+    
+  - name: zabbix-agent install 
+    command: /bin/bash zabbix_install.sh
+    tags: zabbix-agent
+
+  - name: copy zabbix-agentd configuration and start zabbix_agentd
+    copy: src=zabbix-agent.j2 dest=/opt/zabbix/etc/zabbix_agentd.conf
+    command: /opt/zabbix/sbin/zabbix_agentd -c /opt/zabbix/etc/zabbix_agentd.conf 
+    tags: zabbix-agent
+
+  - name: copy monit configuration
+    copy: src=monitrc dest=/etc/monit/monitrc
+    tags: monit
+       
+  - name: start monit service
+    service: name=monit state=reloaded
+    tags: monit
+
+  - name: tweak port listen length
+    sysctl: name=net.core.somaxconn value=65536 state=present
+    tags: sysctl
+
+  - name: tweak receive backlog
+    sysctl: name=net.core.netdev_max_backlog value=600000 state=present
+    tags: sysctl
+
+  - name: tweak socket receive buffer
+    sysctl: name=net.core.rmem_max value=167772160 state=present
+    tags: sysctl
+    
+  - name: tweak socket write buffer
+    sysctl: name=net.core.wmem_max value=167772160 state=present
+    tags: sysctl
+
+  - name: tweak max tcp receive buffer
+    sysctl: name=net.ipv4.tcp_rmem value="16777216 16777216 16777216" state=present
+    tags: sysctl
+    
+  - name: tweak max tcp write buffer
+    sysctl: name=net.ipv4.tcp_wmem value="16777216 16777216 16777216" state=present
+    tags: sysctl
+
+  - name: tweak selective ack
+    sysctl: name=net.ipv4.tcp_sack value=0 state=present
+    tags: sysctl
+
+  - name: tweak tcp syn cookies
+    sysctl: name=net.ipv4.tcp_syncookies value=1 state=present
+    tags: sysctl
+
+  - name: tweak fin timeout
+    sysctl: name=net.ipv4.tcp_fin_timeout value=15 state=present
+    tags: sysctl
+
+  #- name: tewak net connection track
+  #  sysctl: name=net.netfilter.nf_conntrack_max value=6553600 state=present
+  #  tags: sysctl
