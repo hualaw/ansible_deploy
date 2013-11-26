@@ -4,3 +4,6 @@ gen-*
 *.sql.gz
 .vagrant
 ssh/ansible_id_rsa
+key/
+roles/user/files/
+roles/user/vars/

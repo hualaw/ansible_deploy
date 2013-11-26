@@ -1,0 +1,38 @@
+---
+  #- name: set hostname
+  #  command: echo "{{hostname}}" > /etc/hostname && hostname -F /etc/hostname
+
+  #- name: set hosts
+  #  template: src=hosts.j2 dest=/etc/hosts
+
+  - name: copy zabbix deb 
+    copy: src=zabbix-agent_2.0.8-1_amd64.deb dest=/tmp/zabbix-agent_2.0.8-1_amd64.deb
+    tags: zabbix-agent
+    
+  - name: zabbix-agent add user
+    command: /sbin/useradd zabbix -s /sbin/nologin
+    tags: zabbix-agent
+
+  - name: zabbix-agent install
+    command: /usr/bin/dpkg -i /tmp/zabbix-agent_2.0.8-1_amd64.deb
+    tags: zabbix-agent
+
+  - name: copy zabbix-agentd configuration and start zabbix_agentd
+    copy: src=zabbix-agent.j2 dest=/opt/zabbix/etc/zabbix_agentd.conf
+    tags: zabbix-agent
+
+  - name: copy zabbix-agentd configuration and start zabbix_agentd
+    command: /opt/zabbix/sbin/zabbix_agentd -c /opt/zabbix/etc/zabbix_agentd.conf 
+    tags: zabbix-agent
+
+  - name: firewall add prot 10050 
+    command: sed -i '/443/a -A INPUT -p tcp -s 114.112.172.222 --dport 10050 -j ACCEPT' /etc/iptables.firewall.rules
+    tags: zabbix-agent
+
+  - name: iptables reload
+    command: /sbin/iptables-restore </etc/iptables.firewall.rules 
+    tags: zabbix-agent
+
+  #- name: tewak net connection track
+  #  sysctl: name=net.netfilter.nf_conntrack_max value=6553600 state=present
+  #  tags: sysctl
