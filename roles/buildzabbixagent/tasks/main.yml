@@ -10,18 +10,19 @@
     tags: zabbix-agent
     
   - name: zabbix-agent add user
-    command: /sbin/useradd zabbix -s /sbin/nologin
+#    command: /usr/sbin/useradd zabbix -s /sbin/nologin
+    user: name=zabbix createhome=no shell=/sbin/nologin
     tags: zabbix-agent
 
   - name: zabbix-agent install
     command: /usr/bin/dpkg -i /tmp/zabbix-agent_2.0.8-1_amd64.deb
     tags: zabbix-agent
 
-  - name: copy zabbix-agentd configuration and start zabbix_agentd
-    copy: src=zabbix-agent.j2 dest=/opt/zabbix/etc/zabbix_agentd.conf
+  - name: copy zabbix-agentd configuration 
+    template: src=zabbix_agentd.j2 dest=/opt/zabbix/etc/zabbix_agentd.conf
     tags: zabbix-agent
 
-  - name: copy zabbix-agentd configuration and start zabbix_agentd
+  - name:  start zabbix_agentd
     command: /opt/zabbix/sbin/zabbix_agentd -c /opt/zabbix/etc/zabbix_agentd.conf 
     tags: zabbix-agent
 
@@ -30,7 +31,7 @@
     tags: zabbix-agent
 
   - name: iptables reload
-    command: /sbin/iptables-restore </etc/iptables.firewall.rules 
+    command: /sbin/iptables-restore -c /etc/iptables.firewall.rules 
     tags: zabbix-agent
 
   #- name: tewak net connection track
