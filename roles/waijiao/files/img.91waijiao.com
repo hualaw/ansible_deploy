@@ -40,7 +40,7 @@ server {
         #fastcgi_param   REQUEST_URI "/$domain$request_uri";
         fastcgi_intercept_errors on;
         fastcgi_read_timeout 3000;
-	fastcgi_pass unix://dev/shm/php-fpm.sock;
+	fastcgi_pass unix://dev/shm/php.socket;
     }
 
     location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
