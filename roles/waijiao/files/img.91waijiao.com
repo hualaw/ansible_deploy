@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name img.91waijiao.com 121.124.41.101;
+    server_name img.91waijiao.com;
 
     allow all;
     deny all;
@@ -40,7 +40,7 @@ server {
         #fastcgi_param   REQUEST_URI "/$domain$request_uri";
         fastcgi_intercept_errors on;
         fastcgi_read_timeout 3000;
-	fastcgi_pass unix://tmp/php-fpm.sock;
+	fastcgi_pass unix://dev/shm/php-fpm.sock;
     }
 
     location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {

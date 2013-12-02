@@ -4,7 +4,7 @@ upstream waijiao {
 
 server {
     listen 80;
-    server_name www.91waijiao.com www2.91waijiao.com teacher.91waijiao.com api.91waijiao.com agent.91waijiao.com admin.91waijiao.com 121.124.41.101 *.91peilian.com;
+    server_name www.91waijiao.com www2.91waijiao.com teacher.91waijiao.com api.91waijiao.com agent.91waijiao.com admin.91waijiao.com;
 
     allow all;
 
@@ -27,19 +27,9 @@ server {
         try_files $uri $uri/ /index.php?$args;
     }
 
-    #set $domain 'www';
-    #if ( $host ~* "^(.*)\.91waijiao\.com$") {
-    #   set $domain $1;
-    #}
-
-	location ~ ^/information/(.*)$ {
-		proxy_pass http://cms.91waijiao.com;
-	}
-
-    #if (!-e $request_filename) {
-    #    rewrite ^/(.*)$ /index.php/$1 last;
-    #    break;
-    #}
+    location ~ ^/information/(.*)$ {
+	proxy_pass http://cms.91waijiao.com;
+    }
 
     location ~ \.php$ {
         include fastcgi_params;
