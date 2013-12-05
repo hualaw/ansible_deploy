@@ -19,7 +19,7 @@ server {
                 }
         }
         location ~ \.php$ {
-                fastcgi_pass unix://dev/shm/php.sock;
+                fastcgi_pass unix://dev/shm/php.socket;
                 fastcgi_index index.php;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
                 include fastcgi_params;
