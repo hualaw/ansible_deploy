@@ -4,7 +4,7 @@ upstream waijiao {
 
 server {
     listen 80;
-    server_name www.91waijiao.com www2.91waijiao.com teacher.91waijiao.com api.91waijiao.com agent.91waijiao.com admin.91waijiao.com ipad.91waijiao.com *.91peilian.com; 
+    server_name www.91waijiao.com www2.91waijiao.com teacher.91waijiao.com api.91waijiao.com agent.91waijiao.com admin.91waijiao.com ipad.91waijiao.com www.91waijiao.cn; 
 
     allow all;
 
