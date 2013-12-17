@@ -1,0 +1,8 @@
+---
+  - name: copy node deb
+    copy: src={{nodedeb}} dest=/tmp/{{nodedeb}}
+    tags: node
+    
+  - name: run dpkg install noe
+    command: /usr/bin/dpkg -i /tmp/{{nodedeb}}
+    tags: node
