@@ -1,0 +1,21 @@
+---
+  - name: ensure directory /tmp/node is present
+    file: state=directory path=/tmp/node
+    tags: buildnode
+
+  - name: Download node {{version}}
+    get_url: url={{url}} dest=/tmp/node
+    tags: buildnode
+
+  - name: extract node {{version}}
+    command: tar -xf node-v{{version}}.tar.gz chdir=/tmp/node creates={{path}}
+    tags: buildnode
+
+  - name: compile node {{version}}
+    command: make chdir={{path}} creates={{path}}/node
+    tags: buildnode
+
+  - name: build deb packages for node {{version}}
+    command: checkinstall -D -y --pkgname=node --pkgversion={{version}} --maintainer=songchuanhsheng@91waijiao.com make install chdir={{path}}
+    tags: buildnode
+
