@@ -10,7 +10,6 @@
     tags: zabbix-agent
     
   - name: zabbix-agent add user
-#    command: /usr/sbin/useradd zabbix -s /sbin/nologin
     user: name=zabbix createhome=no shell=/sbin/nologin
     tags: zabbix-agent
 
@@ -22,17 +21,21 @@
     template: src=zabbix_agentd.j2 dest=/opt/zabbix/etc/zabbix_agentd.conf
     tags: zabbix-agent
 
+ - name: copy zabbix-agentd start stop script
+    copy: src=zabbix-agent dest=/etc/init.d/zabbix-agent
+    tags: zabbix-agent
+
   - name:  start zabbix_agentd
-    command: /opt/zabbix/sbin/zabbix_agentd -c /opt/zabbix/etc/zabbix_agentd.conf 
+    command: /etc/init.d/zabbix-agent start 
     tags: zabbix-agent
 
-  - name: firewall add prot 10050 
-    command: sed -i '/443/a -A INPUT -p tcp -s 114.112.172.222 --dport 10050 -j ACCEPT' /etc/iptables.firewall.rules
-    tags: zabbix-agent
-
-  - name: iptables reload
-    command: /sbin/iptables-restore -c /etc/iptables.firewall.rules 
-    tags: zabbix-agent
+#  - name: firewall add prot 10050 
+#    command: sed -i '/443/a -A INPUT -p tcp -s 114.112.172.222 --dport 10050 -j ACCEPT' /etc/iptables.firewall.rules
+#    tags: zabbix-agent
+#
+#  - name: iptables reload
+#    command: /sbin/iptables-restore -c /etc/iptables.firewall.rules 
+#    tags: zabbix-agent
 
   #- name: tewak net connection track
   #  sysctl: name=net.netfilter.nf_conntrack_max value=6553600 state=present

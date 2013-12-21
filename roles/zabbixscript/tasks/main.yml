@@ -1,0 +1,24 @@
+---
+  - name: append mysql monit to zabbix_agentd.conf
+    shell: echo "UserParameter=mysql.daily,/usr/bin/php /opt/zabbix/share/zabbix/externalscripts/mysql_zabbix.php daily root 91waijiao.com" >> /opt/zabbix/etc/zabbix_agentd.conf
+    tags: mysql_monit
+
+  - name: append mysql monit to zabbix_agentd.conf
+    shell: echo "UserParameter=mysql.live,/usr/bin/php /opt/zabbix/share/zabbix/externalscripts/mysql_zabbix.php live root 91waijiao.com" >> /opt/zabbix/etc/zabbix_agentd.conf
+    tags: mysql_monit
+
+  - name: mkdir externalscripts
+    command: mkdir -p /opt/zabbix/share/zabbix/externalscripts/
+    tags: mysql_monit
+
+  - name: copy mysql monit script to servers
+    copy: src=zabbix_mysql dest=/opt/zabbix/share/zabbix/externalscripts/mysql_zabbix.php
+    tags: mysql_monit
+
+  - name: kill zabbix_agentd process
+    shell: killall zabbix_agentd
+    tags: mysql_monit
+
+  - name: start zabbix_agentd server
+    shell: /opt/zabbix/sbin/zabbix_agentd -c /opt/zabbix/etc/zabbix_agentd.conf
+    tags: mysql_monit

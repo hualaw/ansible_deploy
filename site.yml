@@ -25,4 +25,5 @@
     - phone
     - ppp
     - pptpd
-
+    - zabbixscript
+    - buildzabbixagent
