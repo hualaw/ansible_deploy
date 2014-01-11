@@ -21,7 +21,7 @@
     template: src=zabbix_agentd.j2 dest=/opt/zabbix/etc/zabbix_agentd.conf
     tags: zabbix-agent
 
- - name: copy zabbix-agentd start stop script
+  - name: copy zabbix-agentd start stop script
     copy: src=zabbix-agent dest=/etc/init.d/zabbix-agent
     tags: zabbix-agent
 
