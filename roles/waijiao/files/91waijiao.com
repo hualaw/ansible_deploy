@@ -9,6 +9,14 @@ server {
     allow all;
 
     root /space1/waijiao/webroot;
+    
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+        expires max;
+        log_not_found off;
+    }
+    
+    access_log /var/log/nginx/waijiao_access.log main;
+    error_log /var/log/nginx/waijiao_error.log;
 
     index index.html index.htm index.php;
 
@@ -40,10 +48,6 @@ server {
         fastcgi_pass waijiao;
     }
 
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
-        expires max;
-        log_not_found off;
-    }
 }
 
 # vim: set filet:ype=nginx tabstop=4 shiftwidth=4:
