@@ -1,0 +1,461 @@
+*** Targets ***
+
+probe = FPing
+
+menu = Top
+title = Network Latency Grapher
+remark = Welcome to the SmokePing website of xxx Company. \
+         Here you will learn all about the latency of our network.
+
++ Local
+
+menu = Local
+title = Local Network
+#parents = owner:/Test/James location:/
+
+++ LocalMachine
+
+menu = Local Machine
+title = This host
+host = localhost
+#alerts = someloss
+
++ AnHui
+menu = AnHui
+
+++ AnHui_58_242_3_246_liantong
+menu = AnHui_58.242.3.246_liantong
+title = AnHui-58.242.3.246_liantong
+host = 58.242.3.246
+
+++ AnHui_61_191_33_130_dianxin
+menu = AnHui_61.191.33.130_dianxin
+title = AnHui-61.191.33.130_dianxin
+host = 61.191.33.130
+
+++ AnHui_211_138_184_254_yidong
+menu = AnHui_211.138.184.254_yidong
+title = AnHui-211.138.184.254_yidong
+host = 211.138.184.254
+
+
++ BeiJing
+menu = BeiJing
+
+++ BeiJing_219_141_135_9_dianxin
+menu = BeiJing_219.141.135.9_dianxin
+title = BeiJing-219.141.135.9_dianxin
+host = 219.141.135.9
+
+++ BeiJing_202_96_18_1_liantong
+menu = BeiJing_202.96.18.1_liantong
+title = BeiJing-202.96.18.1_liantong
+host = 202.96.18.1
+
+++ BeiJing_221_130_45_254_yidong
+menu = BeiJing_221.130.45.254_yidong
+title = BeiJing-221.130.45.254_yidong
+host = 221.130.45.254
+
++ ChongQing
+menu = ChongQing
+
+++ ChongQing_221_5_218_54_liantong
+menu = ChongQing_221.5.218.54_liantong
+title = ChongQing-221.5.218.54_liantong
+host = 221.5.218.54
+
+++ ChongQing_222_176_3_14_dianxin
+menu = ChongQing_222.176.3.14_dianxin
+title = ChongQing-222.176.3.14_dianxin
+host = 222.176.3.14
+
++ FuJian
+menu = FuJian
+
+++ FuJian_202_101_118_127_dianxin
+menu = FuJian_202.101.118.127_dianxin
+title = FuJian-202.101.118.127_dianxin
+host = 202.101.118.127
+
+++ FuJian_58_22_100_54_liantong
+menu = FuJian_58.22.100.54_liantong
+title = FuJian-58.22.100.54_liantong
+host = 58.22.100.54
+
++ GuangDong
+menu = GuangDong
+
+++ GuangDong_120_80_0_66_liantong
+menu = GuangDong_120.80.0.66_liantong
+title = GuangDong-120.80.0.66_liantong
+host = 120.80.0.66
+
+++ GuangDong_61_144_34_109_dianxin
+menu = GuangDong_61.144.34.109_dianxin
+title = GuangDong-61.144.34.109_dianxin
+host = 61.144.34.109
+
+++ GuangDong_61_235_70_98_tietong
+menu = GuangDong_61.235.70.98_tietong
+title = GuangDong-61.235.70.98_tietong
+host = 61.235.70.98
+
++LiaoLing
+menu = LiaoLing
+
+++ LiaoLing_202_96_75_1_liantong
+menu = LiaoLing_202.96.75.1_liantong
+title = LiaoLing-202.96.75.1_liantong
+host = 202.96.75.1
+
+++ LiaoLing_219_148_197_6_dianxin
+menu = LiaoLing_219.148.197.6_dianxin
+title = LiaoLing-219.148.197.6_dianxin
+host = 219.148.197.6
+
+
+++ LiaoLing_211_137_32_254_yidong
+menu = LiaoLing_211.137.32.254_yidong
+title = LiaoLing-211.137.32.254_yidong
+host = 211.137.32.254
+
++ GuangXi
+menu = GuangXi
+
+++ GuangXi_202_103_202_193_dianxin
+menu = GuangXi_202.103.202.193_dianxin
+title = GuangXi-202.103.202.193_dianxin
+host = 202.103.202.193
+
+++ GuangXi_221_7_129_42_liantong
+menu = GuangXi_221.7.129.42_liantong
+title = GuangXi-221.7.129.42_liantong
+host = 221.7.129.42
+
+++ GuangXi_211_138_243_35_yidong
+menu = GuangXi_211.138.243.35_yidong
+title = GuangXi-211.138.243.35_yidong
+host = 211.138.243.35
+
+++ GuangXi_61_235_164_18_tietong
+menu = GuangXi_61.235.164.18_tietong
+title = GuangXi-61.235.164.18_tietong
+host = 61.235.164.18
+
++ HaiNan
+menu = HaiNan
+
+++ HaiNan_59_49_129_19_dianxin
+menu = HaiNan_59.49.129.19_dianxin
+title = HaiNan-59.49.129.19_dianxin
+host = 59.49.129.19
+
+++ HaiNan_60_13_96_10_liantong
+menu = HaiNan_60.13.96.10_liantong
+title = HaiNan-60.13.96.10_liantong
+host = 60.13.96.10
+
+++ HaiNan_211_138_164_1_yidong
+menu = HaiNan_211.138.164.1_yidong
+title = HaiNan-211.138.164.1_yidong
+host = 211.138.164.1
+
++ YunNan
+menu = YunNan
+
+++ YunNan_221_3_131_12_liantong
+menu = YunNan_221.3.131.12_liantong
+title = YunNan-221.3.131.12_liantong
+host = 221.3.131.12
+
+++ YunNan_222_221_17_2_dianxin
+menu = YunNan_222.221.17.2_dianxin
+title = YunNan-222.221.17.2_dianxin
+host = 222.221.17.2
+
+++ YunNan_218_202_0_254_yidong
+menu = YunNan_218.202.0.254_yidong
+title = YunNan-218.202.0.254_yidong
+host = 218.202.0.254
+
+++ YunNan_211_98_72_7_tietong
+menu = YunNan_211.98.72.7_tietong
+title = YunNan-211.98.72.7_tietong
+host = 211.98.72.7
+
++ HeBei
+menu = HeBei
+
+++ HeBei_218_12_32_37_liantong
+menu = HeBei_218.12.32.37_liantong
+title = HeBei-218.12.32.37_liantong
+host = 218.12.32.37
+
+++ HeBei_219_148_19_34_dianxin
+menu = HeBei_219.148.19.34_dianxin
+title = HeBei-219.148.19.34_dianxin
+host = 219.148.19.34
+
+++ HeBei_218_207_64_1_yidong
+menu = HeBei_218.207.64.1_yidong
+title = HeBei-218.207.64.1_yidong
+host = 218.207.64.1
+
++ HeiLongJiang
+menu = HeiLongJiang
+
+++ HeiLongJiang_60_11_80_18_liantong
+menu = HeiLongJiang_60.11.80.18_liantong
+title = HeiLongJiang-60.11.80.18_liantong
+host = 60.11.80.18
+
+++ HeiLongJiang_222_172_32_89_dianxin
+menu = HeiLongJiang_222.172.32.89_dianxin
+title = HeiLongJiang_222.172.32.89_dianxin
+host = 222.172.32.89
+
+++ HeiLongJiang_211_137_252_254_yidong
+menu = HeiLongJiang_211.137.252.254_yidong
+title = HeiLongJiang_211.137.252.254_yidong
+host = 211.137.252.254
+
++ sanxi
+menu = sanxi
+
+++ sanxi_117_34_65_40_dianxin
+menu = sanxi_117.34.65.40_dianxin
+title = sanxi-117.34.65.40_dianxin
+host = 117.34.65.40
+
+++ sanxi_221_11_1_1_liantong
+menu = sanxi_221.11.1.1_liantong
+title = sanxi_221.11.1.1_liantong
+host = 221.11.1.1
+
++ HeNan
+menu = HeNan
+
+++ HeNan_123_52_130_1_dianxin
+menu = HeNan_123.52.130.1_dianxin
+title = HeNan-123.52.130.1_dianxin
+host = 123.52.130.1
+
+++ HeNan_61_168_254_110_liantong
+menu = HeNan_61.168.254.110_liantong
+title = HeNan-61.168.254.110_liantong
+host = 61.168.254.110
+
++ HuBei
+menu = HuBei
+
+++ HuBei_58_19_57_115_liantong
+menu = HuBei_58.19.57.115_liantong
+title = HuBei-58.19.57.115_liantong
+host = 58.19.57.115
+
+++ HuBei_58_48_178_105_dianxin
+menu = HuBei_58.48.178.105_dianxin
+title = HuBei-58.48.178.105_dianxin
+host = 58.48.178.105
+
++ HuNan
+menu = HuNan
+
+++ HuNan_58_20_120_1_liantong
+menu = HuNan_58.20.120.1_liantong
+title = HuNan-58.20.120.1_liantong
+host = 58.20.120.1
+
+++ HuNan_202_103_124_252_dianxin
+menu = HuNan_202.103.124.252_dianxin
+title = HuNan-202.103.124.252_dianxin
+host = 202.103.124.252
+
++ JiangSu
+menu = JiangSu
+
+++ JiangSu_58_241_140_1_liantong
+menu = JiangSu_58.241.140.1_liantong
+title = JiangSu-58.241.140.1_liantong
+host = 58.241.140.1
+
+++ JiangSu_61_132_78_65_dianxin
+menu = JiangSu_61.132.78.65_dianxin
+title = JiangSu-61.132.78.65_dianxin
+host = 61.132.78.65
+
+
+
++ JiangXi
+menu = JiangXi
+
+++ JiangXi_220_248_192_253_liantong
+menu = JiangXi_220.248.192.253_liantong
+title = JiangXi_220.248.192.253_liantong
+host = 220.248.192.253
+
+++ JiangXi_202_101_224_69_dianxin
+menu = JiangXi_202.101.224.69_dianxin
+title = JiangXi-202.101.224.69_dianxin
+host = 202.101.224.69
+
++ JiLin
+menu = JiLin
+
+++ JiLin_125_32_127_1_liantong
+menu = JiLin_125.32.127.1_liantong
+title = JiLin-125.32.127.1_liantong
+host = 125.32.127.1
+
+++ JiLin_222_168_20_103_dianxin
+menu = JiLin_222.168.20.103_dianxin
+title = JiLin-222.168.20.103_dianxin
+host = 222.168.20.103
+
+
++ ShanDong
+menu = ShanDong
+
+++ ShanDong_60_208_51_145_liantong
+menu = ShanDong_60.208.51.145_liantong
+title = ShanDong-60.208.51.145_liantong
+host = 60.208.51.145
+
+++ ShanDong_219_146_19_34_dianxin
+menu = ShanDong_219.146.19.34_dianxin
+title = ShanDong-219.146.19.34_dianxin
+host = 219.146.19.34
+
++ ShangHai
+menu = ShangHai
+
+++ ShangHai_211_95_79_145_liantong
+menu = ShangHai_211.95.79.145_liantong
+title = ShangHai-211.95.79.145_liantong
+host = 211.95.79.145
+
+++ ShangHai_202_96_209_5_dianxin
+menu = ShangHai_202.96.209.5_dianxin
+title = ShangHai-202.96.209.5_dianxin
+host = 202.96.209.5
+
+
++ ShanXi
+menu = ShanXi
+
+++ ShanXi_221_11_76_105_liantong
+menu = ShanXi_221.11.76.105_liantong
+title = ShanXi-221.11.76.105_liantong
+host = 221.11.76.105
+
+++ ShanXi_59_48_13_211_dianxin
+menu = ShanXi_59.48.13.211_dianxin
+title = ShanXi-59.48.13.211_dianxin
+host = 59.48.13.211
+
+
++ SiChuan
+menu = SiChuan
+
+++ SiChuan_218_104_204_128_liantong
+menu = SiChuan_218.104.204.128_liantong
+title = SiChuan-218.104.204.128_liantong
+host = 218.104.204.128
+
+++ SiChuan_221_237_185_94_dianxin
+menu = SiChuan_221.237.185.94_dianxin
+title = SiChuan-221.237.185.94_dianxin
+host = 221.237.185.94
+
+++ SiChuan_61_236_159_99_tietong
+menu = SiChuan_61.236.159.99_tietong
+title = SiChuan-61.236.159.99_tietong
+host = 61.236.159.99
+
++ TianJing
+menu = TianJing
+
+++ TianJing_117_8_113_30_liantong
+menu = TianJing_117.8.113.30_liantong
+title = TianJing-117.8.113.30_liantong
+host = 117.8.113.30
+
+++ TianJing_221_238_222_190_dianxin
+menu = TianJing_221.238.222.190_dianxin
+title = TianJing-221.238.222.190_dianxin
+host = 221.238.222.190
+
++ ZheJiang
+menu = ZheJiang
+
+++ ZheJiang_221_12_1_227_liantong
+menu = ZheJiang_221.12.1.227_liantong
+title = ZheJiang-221.12.1.227_liantong
+host = 221.12.1.227
+
+++ ZheJiang_60_176_107_14_dianxin
+menu = ZheJiang_60.176.107.14_dianxin
+title = ZheJiang-60.176.107.14_dianxin
+host = 60.176.107.14
+
+++ ZheJiang_211_140_19_1_yidong
+menu = ZheJiang_211.140.19.1_yidong
+title = ZheJiang_211.140.19.1_yidong
+host = 211.140.19.1
+
++ ZhaoWei
+menu = ZhaoWei
+
+++ ZhaoWei_118_26_224_7
+menu = ZhaoWei_118_26_224_7
+title = ZhaoWei-118_26_224_7
+host = 118.26.224.7
+
+++ ZhaoWei_114_112_172_220
+menu = ZhaoWei_114_112_172_220
+title = ZhaoWei-114_112_172_220
+host = 114.112.172.220
+
+++ ZhaoWei_118_26_203_3
+menu = ZhaoWei_118_26_203_3
+title = ZhaoWei-118_26_203_3
+host = 118.26.203.3
+
+++ ZhaoWei_118_26_203_16
+menu = ZhaoWei_118_26_203_16
+title = ZhaoWei-118_26_203_16
+host = 118.26.203.16
+
++ YiZhuang
+menu = YiZhuang
+
+++ YiZhunagan_ctc_220_181_167_230
+menu = YiZhuang_ctc_220_181_167_230
+title = YiZhunagan_ctc_220_181_167_230
+host = 220.181.167.230
+
+++ YiZhunagan_cnc_114_66_201_40
+menu = YiZhunagan_cnc_114_66_201_40
+title = YiZhunagan_cnc_114_66_201_40
+host = 114.66.201.40
+
+
+++ YiZhunagan_ctc_220_181_167_241
+menu = YiZhuang_ctc_220_181_167_241
+title = YiZhunagan_ctc_220_181_167_241
+host = 220.181.167.241
+
+++ YiZhunagan_cnc_114_66_201_51
+menu = YiZhunagan_cnc_114_66_201_51
+title = YiZhunagan_cnc_114_66_201_51
+host = 114.66.201.51
+
+
++ hongkong
+menu = hongkong
+
+++ hongkong_210_245_210_222
+menu = hongkong_210_245_210_222
+title = hongkong_210_245_210_222
+host = 210.245.210.222
