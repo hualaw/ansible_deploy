@@ -1,6 +1,6 @@
 ---
   - name: Install packages (for 12.04 LTS)
-    apt: pkg=python-software-properties
+    apt: pkg=python-software-properties force=yes
     #apt: pkg=software-properties-common
     tags: java
 
@@ -25,7 +25,7 @@
     tags: java
     
   - name: download apache ant
-    get_url: url={{url}} dest=/tmp/java
+    copy: src=apache-ant-1.9.2-bin.zip dest=/tmp/java/apache-ant-1.9.2-bin.zip
     tags: java
 
   - name: unzip apache ant {{version}}

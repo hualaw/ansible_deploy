@@ -1,6 +1,6 @@
 server {
 	listen      80;
-	server_name data.91waijiao.com;
+	server_name data.91waijiao.com video.91waijiao.com;
 	charset     utf-8;
 	root        /space/data;
 	access_log  /var/log/nginx/data_access_log;

@@ -1,0 +1,9 @@
+---
+  - name: apt install
+    command: aptitude install smokeping
+    tags: smokeping
+  
+  - name: copy targets configurations
+    copy: src=Targets dest=/etc/smokeping/config.d/Targets
+    tags: smokeping
+    

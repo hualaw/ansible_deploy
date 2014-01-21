@@ -26,7 +26,7 @@
     tags: zabbix-agent
 
   - name:  start zabbix_agentd
-    command: /etc/init.d/zabbix-agent start 
+    shell: chmod 755 /etc/init.d/zabbix-agent ; /etc/init.d/zabbix-agent start 
     tags: zabbix-agent
 
 #  - name: firewall add prot 10050 
@@ -36,7 +36,3 @@
 #  - name: iptables reload
 #    command: /sbin/iptables-restore -c /etc/iptables.firewall.rules 
 #    tags: zabbix-agent
-
-  #- name: tewak net connection track
-  #  sysctl: name=net.netfilter.nf_conntrack_max value=6553600 state=present
-  #  tags: sysctl

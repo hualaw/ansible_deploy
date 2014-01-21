@@ -51,6 +51,18 @@
     command: chown -R www-data:www-data /space1/tizi
     tags: tizi
 
+  - name: copy nginx configurations
+    copy: src=nginx.conf dest=/etc/nginx/nginx.conf
+    tags: tizi
+
+  - name: copy php configurations
+    copy: src=www.conf dest=/etc/php5/fpm/pool.d/www.conf
+    tags: tizi
+
+  - name: copy tizi log rsys configurations
+    copy: src=00-remore.conf dest=/etc/rsyslog.d/00-remore.conf
+    tags: tizi
+
   - name: copy tizi nginx configurations
     copy: src=tizi.com dest=/etc/nginx/sites-available/tizi.com
     tags: tizi
